@@ -1,7 +1,7 @@
 package post
 
 import member.Member
-import member.MemberNotAuthorizedException
+import member.exception.MemberNotAuthorizedException
 import member.Position
 import java.time.LocalDateTime
 
