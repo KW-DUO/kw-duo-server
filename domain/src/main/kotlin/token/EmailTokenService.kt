@@ -1,7 +1,5 @@
 package token
 
-import member.Member
-
 class EmailTokenService(
     private val emailTokenRepository: EmailTokenRepository,
 ) {
@@ -15,6 +13,8 @@ class EmailTokenService(
     fun findValidToken(memberId: Long, token: String): Boolean {
         val emailToken = emailTokenRepository.findValidToken(memberId, token)
             ?: return false
+
+        check(!emailToken.isUsed) { "유효하지 않은 토큰입니다." }
 
         emailToken.use()
         return true
