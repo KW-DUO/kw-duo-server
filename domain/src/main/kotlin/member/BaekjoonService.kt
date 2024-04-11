@@ -12,5 +12,4 @@ class BaekjoonService(
 
         memberRepository.save(member)
     }
-
 }

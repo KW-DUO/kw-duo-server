@@ -1,11 +1,12 @@
 package member
 
+import member.dto.MemberUpdateInfoRequest
 import java.time.LocalDateTime
 
 class Member(
     val id: Long? = null,
     val oAuthId: String,
-    val profileImgId: Long?,
+    var profileImgId: Long?,
     var nickname: String,
     var bio: String,
     val department: Department,
@@ -31,23 +32,30 @@ class Member(
         emailInfo.authenticate()
     }
 
+    fun updateInfo(request: MemberUpdateInfoRequest) {
+        this.profileImgId = request.profileImgId
+        this.nickname = request.nickname
+        this.bio = request.bio
+        this.techStack = request.techStack.map { TechStack.of(it) }
+        this.position = Position.of(request.position)
+        this.githubUrl = request.githubUrl
+
+        if (request.baekjoonId != null) {
+            this.baekjoonInfo = BaekJoonInfo(request.baekjoonId)
+        } else {
+            removeBaekjoonInfo()
+        }
+    }
+
     fun hasBaekjoonInfo(): Boolean {
         return baekjoonInfo?.baekjoonId != null
     }
 
-    fun updateBaekjoonInfo(
-        baekjoonId: String,
-        tier: BaekjoonTier,
-        tierUpdatedAt: LocalDateTime = LocalDateTime.now()
-    ) {
-        baekjoonInfo = BaekJoonInfo(baekjoonId, tier, tierUpdatedAt)
-    }
-
     fun updateBaekjoonTier(tier: BaekjoonTier) {
-        val prevInfo = baekjoonInfo
-        checkNotNull(prevInfo) { "백준 정보가 없으면 티어를 갱신할 수 없습니다." }
+        check(hasBaekjoonInfo()) { "백준 정보가 없으면 티어를 갱신할 수 없습니다." }
 
-        updateBaekjoonInfo(prevInfo.baekjoonId, tier)
+        val prevInfo = baekjoonInfo
+        this.baekjoonInfo = BaekJoonInfo(prevInfo!!.baekjoonId, tier)
     }
 
     fun removeBaekjoonInfo() {
