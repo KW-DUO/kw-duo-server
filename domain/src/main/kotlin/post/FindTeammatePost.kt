@@ -1,11 +1,9 @@
 package post
 
-import member.Member
 import member.Position
-import java.time.LocalDate
 
 class FindTeammatePost(
-    id: Long?,
+    id: Long? = null,
     title: String,
     content: String,
     authorId: Long,
