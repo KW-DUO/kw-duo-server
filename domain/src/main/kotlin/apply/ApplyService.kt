@@ -10,7 +10,7 @@ class ApplyService(
         applyRepository.save(apply)
     }
 
-    private fun isApplied(memberId: Long, postId: Long): Boolean {
+    fun isApplied(memberId: Long, postId: Long): Boolean {
         return applyRepository.existsByMemberAndPostId(memberId, postId)
     }
 }
