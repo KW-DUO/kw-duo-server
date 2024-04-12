@@ -6,4 +6,11 @@ class BookMark(
     val postId: Long,
     var isBookMarked: Boolean,
 ) {
+    fun bookmark() {
+        isBookMarked = true
+    }
+
+    fun delete() {
+        isBookMarked = false
+    }
 }
