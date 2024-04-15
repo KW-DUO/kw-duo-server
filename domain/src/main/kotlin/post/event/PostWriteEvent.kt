@@ -1,4 +1,4 @@
-package kwduo.post.event
+package post.event
 
 import post.Post
 

@@ -1,4 +1,4 @@
-package kwduo.post.dto
+package post.dto
 
 import member.Position
 import post.Field
