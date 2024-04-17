@@ -1,5 +1,7 @@
 package kwduo.post
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Min
 import kwduo.member.schema.AuthorSchema
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
+@Tag(name = "Post")
 @RestController
 class PostController {
+    @Operation(summary = "팀원 찾기 글 조회")
     @GetMapping("/find-teammate-posts")
     fun getFindTeammatePosts(
         @RequestParam(required = false) q: String?,
@@ -89,6 +93,7 @@ class PostController {
         )
     }
 
+    @Operation(summary = "팀 찾기 글 조회")
     @GetMapping("/find-team-posts")
     fun getFindTeamPosts(
         @RequestParam(required = false) q: String?,
@@ -159,12 +164,13 @@ class PostController {
         )
     }
 
-    @GetMapping("/posts/{id}")
+    @Operation(summary = "글 상세 조회")
+    @GetMapping("/posts/{postId}")
     fun getPostDetail(
-        @PathVariable id: Long,
+        @PathVariable postId: Long,
     ): PostDetailSchema {
         return PostDetailSchema(
-            id = id,
+            id = postId,
             postType = "FIND_TEAMMATE",
             projectType = "CLASS_PROJECT",
             title = "프론트엔드 개발자 구합니다",

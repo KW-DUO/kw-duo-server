@@ -1,5 +1,7 @@
 package kwduo.chatting
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Min
 import kwduo.chatting.dto.ChatResponseDTO
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
 
+@Tag(name = "Chatting")
 @RestController
 class ChattingController {
+    @Operation(summary = "채팅방 목록 조회")
     @GetMapping("/chats")
     fun getChattingRoomList(
         @RequestParam(name = "q", required = false) nickname: String?,
@@ -52,6 +56,7 @@ class ChattingController {
         )
     }
 
+    @Operation(summary = "채팅방의 채팅 조회")
     @GetMapping("/chats/{roomId}")
     fun getChats(
         @PathVariable roomId: Long,

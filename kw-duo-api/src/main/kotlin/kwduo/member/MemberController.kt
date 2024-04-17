@@ -1,13 +1,17 @@
 package kwduo.member
 
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.annotation.NeedLogin
 import kwduo.member.dto.MemberInfoResponseDTO
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
+@Tag(name = "Member")
 @RestController
 class MemberController {
     @NeedLogin
+    @Operation(summary = "회원 정보 조회")
     @GetMapping("/members/info")
     fun getMemberInfo(): MemberInfoResponseDTO {
         return MemberInfoResponseDTO(
