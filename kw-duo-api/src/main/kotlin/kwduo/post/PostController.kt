@@ -1,5 +1,7 @@
 package kwduo.post
 
+import jakarta.validation.Valid
+import jakarta.validation.constraints.Min
 import kwduo.member.schema.AuthorSchema
 import kwduo.post.dto.PostSummaryResponseDTO
 import kwduo.post.schema.BookmarkSchema
@@ -23,6 +25,8 @@ class PostController {
         @RequestParam(required = false) wantedField: String?,
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
+        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
+        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         if (q == "i dont want see") {
             return PostSummaryResponseDTO(posts = emptyList())
@@ -94,7 +98,9 @@ class PostController {
         @RequestParam(required = false) position: String?,
         @RequestParam(required = false) wantedField: String?,
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
-        @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean
+        @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
+        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
+    @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         return PostSummaryResponseDTO(
             posts = listOf(
