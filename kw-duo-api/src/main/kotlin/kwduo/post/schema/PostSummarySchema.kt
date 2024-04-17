@@ -9,7 +9,7 @@ data class PostSummarySchema(
     val projectType: String,
     val title: String,
     val department: String,
-    val `class`: String,
+    val `class`: String?,
     val wantedPosition: List<String>,
     val author: AuthorSchema,
     val bookmark: BookmarkSchema,
