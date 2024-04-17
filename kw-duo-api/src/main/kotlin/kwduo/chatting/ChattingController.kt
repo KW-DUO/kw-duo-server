@@ -38,7 +38,7 @@ class ChattingController {
                         1,
                         "안녕하세요",
                         ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                        LocalDateTime.now()
+                        LocalDateTime.now(),
                     ),
                 ),
                 ChattingRoomSchema(
@@ -48,7 +48,7 @@ class ChattingController {
                         2,
                         "중간고사 족보 삽니다",
                         ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                        LocalDateTime.now().minusDays(2)
+                        LocalDateTime.now().minusDays(2),
                     ),
                 ),
             ),
@@ -69,31 +69,31 @@ class ChattingController {
                     1,
                     "안녕하세요",
                     ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                    LocalDateTime.now().minusDays(3)
+                    LocalDateTime.now().minusDays(3),
                 ),
                 ChatSchema(
                     2,
                     "안녕하세요",
                     ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                    LocalDateTime.now().minusDays(3)
+                    LocalDateTime.now().minusDays(3),
                 ),
                 ChatSchema(
                     3,
                     "족보 삽니다",
                     ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                    LocalDateTime.now().minusDays(3)
+                    LocalDateTime.now().minusDays(3),
                 ),
                 ChatSchema(
                     4,
                     "족발 보쌈이요?",
                     ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                    LocalDateTime.now().minusDays(2)
+                    LocalDateTime.now().minusDays(2),
                 ),
                 ChatSchema(
                     5,
                     "? ;;;",
                     ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                    LocalDateTime.now()
+                    LocalDateTime.now(),
                 ),
             ),
         )

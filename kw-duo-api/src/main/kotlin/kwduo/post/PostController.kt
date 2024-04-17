@@ -88,8 +88,8 @@ class PostController {
                     techStack = listOf("KOTLIN", "JAVA", "SPRING", "JPA"),
                     `class` = null,
                     createdAt = LocalDateTime.now(),
-                )
-            )
+                ),
+            ),
         )
     }
 
@@ -105,7 +105,7 @@ class PostController {
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-    @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         return PostSummaryResponseDTO(
             posts = listOf(

@@ -15,7 +15,7 @@ class MemberAuthController(
     @Operation(summary = "회원 가입")
     @PostMapping("/members/join")
     fun join(
-        @RequestBody request: MemberJoinRequestDTO
+        @RequestBody request: MemberJoinRequestDTO,
     ) {
 //        memberService.join(request.toRequest())
         // TODO: 액세스 토큰 내리기

@@ -12,14 +12,14 @@ class NotificationService(
         requestMember: Member,
         member: Member,
         post: Post,
-        chattingRoom: ChattingRoom
+        chattingRoom: ChattingRoom,
     ) {
         val notification = Notification.create(
             notificationType,
             requestMember,
             member,
             post,
-            chattingRoom
+            chattingRoom,
         )
 
         notificationRepository.save(notification)

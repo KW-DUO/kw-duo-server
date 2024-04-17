@@ -28,7 +28,7 @@ data class MemberJoinRequestDTO(
             email = email,
             githubUrl = githubUrl,
             baekjoonId = baekjoonId,
-            joinAt = joinAt
+            joinAt = joinAt,
         )
     }
 }
