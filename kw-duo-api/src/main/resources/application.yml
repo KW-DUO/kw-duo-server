@@ -5,3 +5,7 @@ spring:
   config:
     import:
       - logging.yml
+
+springdoc:
+  swagger-ui:
+    path: /api-docs
