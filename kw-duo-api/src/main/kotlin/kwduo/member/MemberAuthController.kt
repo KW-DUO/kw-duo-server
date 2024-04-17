@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController
 class MemberAuthController(
 //    private val memberService: MemberService,
 ) {
-    @PostMapping("/member/join")
+    @PostMapping("/members/join")
     fun join(
         @RequestBody request: MemberJoinRequestDTO
     ) {
