@@ -1,6 +1,11 @@
 package member.dto
 
-import member.*
+import member.BaekJoonInfo
+import member.Department
+import member.KwEmailInfo
+import member.Member
+import member.Position
+import member.TechStack
 import java.time.LocalDateTime
 
 data class MemberJoinRequest(
@@ -17,10 +22,11 @@ data class MemberJoinRequest(
     val joinAt: LocalDateTime,
 ) {
     fun toMember(): Member {
-        val baekjoonInfo = when(baekjoonId) {
-            null -> null
-            else -> BaekJoonInfo(baekjoonId!!, null)
-        }
+        val baekjoonInfo =
+            when (baekjoonId) {
+                null -> null
+                else -> BaekJoonInfo(baekjoonId!!, null)
+            }
 
         return Member(
             oAuthId = oAuthId,

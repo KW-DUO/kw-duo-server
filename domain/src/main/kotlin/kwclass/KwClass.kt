@@ -1,8 +1,8 @@
-package `class`
+package kwclass
 
 import member.Department
 
-data class Class(
+data class KwClass(
     val id: Long? = null,
     val className: String,
     val professorName: String,

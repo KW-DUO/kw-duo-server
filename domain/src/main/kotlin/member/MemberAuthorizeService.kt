@@ -7,7 +7,10 @@ class MemberAuthorizeService(
     private val memberRepository: MemberRepository,
     private val emailTokenService: EmailTokenService,
 ) {
-    fun authorizeEmailToken(memberId: Long, token: String) {
+    fun authorizeEmailToken(
+        memberId: Long,
+        token: String,
+    ) {
         val member = memberReader.findById(memberId)
 
         val isTokenExist = emailTokenService.findValidToken(member.id!!, token)

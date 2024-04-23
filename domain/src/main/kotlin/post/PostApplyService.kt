@@ -10,7 +10,10 @@ class PostApplyService(
     private val chattingService: ChattingService,
     private val memberReader: MemberReader,
 ) {
-    fun applyTeam(post: FindTeammatePost, requestMember: Member): Long {
+    fun applyTeam(
+        post: FindTeammatePost,
+        requestMember: Member,
+    ): Long {
         check(post.canApply) { "팀원 모집이 마감되었습니다." }
 
         val teamOwner = memberReader.findById(post.authorId)
@@ -24,7 +27,10 @@ class PostApplyService(
         return chattingRoom.id!!
     }
 
-    fun inviteTeammate(post: FindTeamPost, requestMember: Member): Long {
+    fun inviteTeammate(
+        post: FindTeamPost,
+        requestMember: Member,
+    ): Long {
         check(post.canApply) { "팀 모집이 마감되었습니다." }
 
         val teamFindMember = memberReader.findById(post.authorId)

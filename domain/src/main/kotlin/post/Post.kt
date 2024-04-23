@@ -1,8 +1,8 @@
 package post
 
 import member.Member
-import member.exception.MemberNotAuthorizedException
 import member.Position
+import member.exception.MemberNotAuthorizedException
 import java.time.LocalDateTime
 
 abstract class Post(
@@ -15,7 +15,7 @@ abstract class Post(
     val wantedPosition: List<Position>,
     var isDeleted: Boolean = false,
     var isClosed: Boolean = false,
-    val createdAt: LocalDateTime = LocalDateTime.now()
+    val createdAt: LocalDateTime = LocalDateTime.now(),
 ) {
     private var detail: PostDetail
 
@@ -40,7 +40,11 @@ abstract class Post(
         return title
     }
 
-    fun updateDetail(member: Member, title: String, content: String): Boolean {
+    fun updateDetail(
+        member: Member,
+        title: String,
+        content: String,
+    ): Boolean {
         if (!isAuthor(member)) {
             throw MemberNotAuthorizedException("작성자만 수정할 수 있습니다.")
         }

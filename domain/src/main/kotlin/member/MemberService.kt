@@ -25,7 +25,10 @@ class MemberService(
         eventPublisher.publishEvent(MemberJoinEvent(savedMember))
     }
 
-    fun updateInfo(requestMemberId: Long, request: MemberUpdateInfoRequest) {
+    fun updateInfo(
+        requestMemberId: Long,
+        request: MemberUpdateInfoRequest,
+    ) {
         val member = memberReader.findById(requestMemberId)
 
         check(memberReader.isExistNickname(request.nickname)) { "이미 사용중인 닉네임입니다." }

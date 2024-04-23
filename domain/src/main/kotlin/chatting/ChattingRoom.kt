@@ -13,7 +13,7 @@ class ChattingRoom(
 
     fun updateLastReadMessageTime(
         memberId: Long,
-        now: LocalDateTime = LocalDateTime.now()
+        now: LocalDateTime = LocalDateTime.now(),
     ) {
         check(!isMember(memberId)) { "채팅방에 속한 멤버가 아닙니다." }
 

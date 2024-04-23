@@ -28,9 +28,10 @@ internal class KwEmailInfoTest : BehaviorSpec({
                     }
 
                     And("이미 인증된 경우 에러를 발생한다") {
-                        val result = shouldThrow<IllegalStateException> {
-                            info.authenticate()
-                        }
+                        val result =
+                            shouldThrow<IllegalStateException> {
+                                info.authenticate()
+                            }
 
                         result.message shouldBe "이미 인증된 이메일입니다."
                     }
@@ -49,9 +50,10 @@ internal class KwEmailInfoTest : BehaviorSpec({
                     "a$%b123@kw.ac.kr",
                     "duo@kw.ac.kr@kw.ac.kr",
                 ) { invalidEmail ->
-                    val exception = shouldThrow<IllegalArgumentException> {
-                        KwEmailInfo(invalidEmail)
-                    }
+                    val exception =
+                        shouldThrow<IllegalArgumentException> {
+                            KwEmailInfo(invalidEmail)
+                        }
 
                     exception.message shouldBe "이메일 형식이 올바르지 않습니다."
                 }
@@ -70,9 +72,10 @@ internal class KwEmailInfoTest : BehaviorSpec({
                 "duo@kw.ac.en",
                 "duo@kw.ac.krr",
             ) { invalidEmail ->
-                val exception = shouldThrow<IllegalArgumentException> {
-                    KwEmailInfo(invalidEmail)
-                }
+                val exception =
+                    shouldThrow<IllegalArgumentException> {
+                        KwEmailInfo(invalidEmail)
+                    }
 
                 exception.message shouldBe "이메일은 광운대학교 이메일이어야 합니다."
             }

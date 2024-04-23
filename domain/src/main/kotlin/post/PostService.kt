@@ -9,7 +9,7 @@ class PostService(
         requestMember: Member,
         post: Post,
         title: String,
-        content: String
+        content: String,
     ) {
         val isUpdated = post.updateDetail(requestMember, title, content)
 

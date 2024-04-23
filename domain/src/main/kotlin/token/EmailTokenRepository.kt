@@ -8,6 +8,6 @@ interface EmailTokenRepository {
     fun findValidToken(
         memberId: Long,
         token: String,
-        now: LocalDateTime = LocalDateTime.now()
+        now: LocalDateTime = LocalDateTime.now(),
     ): EmailToken?
 }

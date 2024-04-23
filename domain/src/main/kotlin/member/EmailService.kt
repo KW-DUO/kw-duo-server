@@ -15,7 +15,7 @@ class EmailService(
         emailSender.sendEmail(
             email = member.email,
             title = "[DUO] 가입 인증 메일",
-            content = "이메일 토큰: ${token.token}", // TODO: html 같은 걸로 이쁘게 만들긴 해야할듯 함
+            content = "이메일 토큰: ${token.token}",
         )
     }
 }

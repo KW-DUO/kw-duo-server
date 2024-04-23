@@ -7,7 +7,7 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
-class SpringSecurityConfig {
+class SecurityConfig {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -19,7 +19,7 @@ class SpringSecurityConfig {
                     "/swagger-ui/**",
                     "/swagger-resources/**",
                     "/v3/api-docs/**",
-                    "/api-docs"
+                    "/api-docs",
                 ).permitAll()
             }
             .exceptionHandling { exception ->

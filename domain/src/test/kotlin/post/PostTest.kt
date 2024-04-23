@@ -9,14 +9,15 @@ import io.kotest.matchers.string.shouldStartWith
 class PostTest : BehaviorSpec({
 
     Given("제목이 10자가 넘는 글은") {
-        val post = FindTeamPost(
-            title = "it's_too_long_to_read",
-            content = "content",
-            authorId = 1L,
-            projectType = ProjectType.SIDE_PROJECT,
-            interestingField = emptyList(),
-            wantedPosition = emptyList(),
-        )
+        val post =
+            FindTeamPost(
+                title = "it's_too_long_to_read",
+                content = "content",
+                authorId = 1L,
+                projectType = ProjectType.SIDE_PROJECT,
+                interestingField = emptyList(),
+                wantedPosition = emptyList(),
+            )
 
         When("simplifiedTitle을 얻어왔을 때") {
             val title = post.getSimplifiedTitle()
@@ -30,14 +31,15 @@ class PostTest : BehaviorSpec({
     }
 
     Given("제목이 10글자 이하인 글은") {
-        val post = FindTeamPost(
-            title = "it's_short",
-            content = "content",
-            authorId = 1L,
-            projectType = ProjectType.SIDE_PROJECT,
-            interestingField = emptyList(),
-            wantedPosition = emptyList(),
-        )
+        val post =
+            FindTeamPost(
+                title = "it's_short",
+                content = "content",
+                authorId = 1L,
+                projectType = ProjectType.SIDE_PROJECT,
+                interestingField = emptyList(),
+                wantedPosition = emptyList(),
+            )
 
         When("simplifiedTitle을 얻어왔을 때") {
             val title = post.getSimplifiedTitle()

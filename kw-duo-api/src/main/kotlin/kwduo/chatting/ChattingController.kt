@@ -30,29 +30,32 @@ class ChattingController {
         }
 
         return ChattingRoomResponseDTO(
-            room = listOf(
-                ChattingRoomSchema(
-                    id = 1,
-                    ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                    lastChat = ChatSchema(
-                        1,
-                        "안녕하세요",
+            room =
+                listOf(
+                    ChattingRoomSchema(
+                        id = 1,
                         ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                        LocalDateTime.now(),
+                        lastChat =
+                            ChatSchema(
+                                1,
+                                "안녕하세요",
+                                ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                                LocalDateTime.now(),
+                            ),
+                    ),
+                    ChattingRoomSchema(
+                        id = 2,
+                        member = ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                        lastChat =
+                            ChatSchema(
+                                2,
+                                "중간고사 족보 삽니다",
+                                ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                                LocalDateTime.now().minusDays(2),
+                            ),
                     ),
                 ),
-                ChattingRoomSchema(
-                    id = 2,
-                    member = ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                    lastChat = ChatSchema(
-                        2,
-                        "중간고사 족보 삽니다",
-                        ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                        LocalDateTime.now().minusDays(2),
-                    ),
-                ),
-            ),
-            hasMore = false
+            hasMore = false,
         )
     }
 

@@ -1,7 +1,7 @@
 package post
 
 enum class ProjectType(
-    private val value: String
+    private val value: String,
 ) {
     SIDE_PROJECT("SIDE_PROJECT"),
     CLASS_PROJECT("CLASS_PROJECT"),

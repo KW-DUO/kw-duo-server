@@ -1,6 +1,5 @@
 package token
 
-import member.Member
 import util.RandomSlugMaker
 import java.time.LocalDateTime
 

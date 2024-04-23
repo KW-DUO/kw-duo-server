@@ -5,7 +5,7 @@ import member.Member
 import post.Post
 
 class NotificationService(
-    private val notificationRepository: NotificationRepository
+    private val notificationRepository: NotificationRepository,
 ) {
     fun sendNotification(
         notificationType: NotificationType,
@@ -14,13 +14,14 @@ class NotificationService(
         post: Post,
         chattingRoom: ChattingRoom,
     ) {
-        val notification = Notification.create(
-            notificationType,
-            requestMember,
-            member,
-            post,
-            chattingRoom,
-        )
+        val notification =
+            Notification.create(
+                notificationType,
+                requestMember,
+                member,
+                post,
+                chattingRoom,
+            )
 
         notificationRepository.save(notification)
     }

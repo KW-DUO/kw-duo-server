@@ -6,21 +6,20 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
 
 @Configuration
-class WebConfig(
-) : WebMvcConfigurer {
+class WebConfig() : WebMvcConfigurer {
     override fun addCorsMappings(registry: CorsRegistry) {
         registry.addMapping("/**")
             .allowedOriginPatterns(
                 "http://localhost:*",
                 "https://localhost:*",
-                "https://*.vercel.app"
+                "https://*.vercel.app",
             )
             .allowedMethods(
                 HttpMethod.GET.name(),
                 HttpMethod.POST.name(),
                 HttpMethod.PUT.name(),
                 HttpMethod.DELETE.name(),
-                HttpMethod.PATCH.name()
+                HttpMethod.PATCH.name(),
             )
             .allowCredentials(true)
     }

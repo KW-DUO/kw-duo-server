@@ -14,15 +14,13 @@ class FindTeammatePost(
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
 ) : Post(
-    id = id,
-    title = title,
-    content = content,
-    authorId = authorId,
-    projectType = projectType,
-    interestingField = interestingField,
-    wantedPosition = wantedPosition,
-
-    isDeleted = isDeleted,
-    isClosed = isClosed
-) {
-}
+        id = id,
+        title = title,
+        content = content,
+        authorId = authorId,
+        projectType = projectType,
+        interestingField = interestingField,
+        wantedPosition = wantedPosition,
+        isDeleted = isDeleted,
+        isClosed = isClosed,
+    )

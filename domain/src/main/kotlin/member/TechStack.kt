@@ -1,7 +1,7 @@
 package member
 
 enum class TechStack(
-    val displayName: String
+    val displayName: String,
 ) {
     REACT("React"),
     NEXTJS("Next.js"),

@@ -1,7 +1,7 @@
 package member
 
 class MemberReader(
-    private val memberRepository: MemberRepository
+    private val memberRepository: MemberRepository,
 ) {
     fun findById(memberId: Long): Member {
         return memberRepository.findById(memberId)

@@ -1,6 +1,6 @@
 package util
 
-import java.util.*
+import java.util.Random
 
 object RandomSlugMaker {
     private const val KEYS = "abcdefghijklmnopqrstuvwxyz1234567890"

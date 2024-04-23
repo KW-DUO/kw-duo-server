@@ -2,7 +2,6 @@ package chatting
 
 import member.Member
 import post.FindTeammatePost
-import post.Post
 
 class ChattingService(
     private val chatRepository: ChatRepository,
@@ -10,7 +9,7 @@ class ChattingService(
 ) {
     fun createOrGetChattingRoom(
         teamJoiner: Member,
-        teamOwner: Member
+        teamOwner: Member,
     ): ChattingRoom {
         return chattingRoomRepository.findByParticipantMemberId(teamJoiner.id!!, teamOwner.id!!)
             ?: return createChattingRoom(teamJoiner, teamOwner)
@@ -18,7 +17,7 @@ class ChattingService(
 
     private fun createChattingRoom(
         teamJoiner: Member,
-        teamOwner: Member
+        teamOwner: Member,
     ): ChattingRoom {
         val chattingRoom = ChattingRoom.create(teamJoiner.id!!, teamOwner.id!!)
         chattingRoomRepository.save(chattingRoom)
@@ -29,15 +28,16 @@ class ChattingService(
     fun sendChat(
         chattingRoom: ChattingRoom,
         sendMemberId: Long,
-        message: String
+        message: String,
     ) {
         check(chattingRoom.isMember(sendMemberId)) { "채팅방에 속한 멤버가 아닙니다." }
 
-        val chat = Chat(
-            chattingRoomId = chattingRoom.id!!,
-            message = message,
-            sendMemberId = sendMemberId
-        )
+        val chat =
+            Chat(
+                chattingRoomId = chattingRoom.id!!,
+                message = message,
+                sendMemberId = sendMemberId,
+            )
 
         chatRepository.save(chat)
 
@@ -45,7 +45,11 @@ class ChattingService(
         chattingRoomRepository.save(chattingRoom)
     }
 
-    fun sendFirstMetChat(post: FindTeammatePost, chattingRoom: ChattingRoom, teamJoiner: Member) {
+    fun sendFirstMetChat(
+        post: FindTeammatePost,
+        chattingRoom: ChattingRoom,
+        teamJoiner: Member,
+    ) {
         val chat = Chat.createFirstMetChat(post, chattingRoom, teamJoiner)
         chatRepository.save(chat)
     }

@@ -1,7 +1,7 @@
 package member
 
 enum class Position(
-    val displayName: String
+    val displayName: String,
 ) {
     FRONTEND("프론트엔드"),
     BACKEND("백엔드"),

@@ -9,5 +9,4 @@ enum class Field {
     BLOCKCHAIN,
     EMBEDDED,
     ETC,
-    ;
 }

@@ -3,5 +3,5 @@ package kwduo.chatting.dto
 import kwduo.chatting.schema.ChatSchema
 
 data class ChatResponseDTO(
-    val chat: List<ChatSchema>
+    val chat: List<ChatSchema>,
 )

@@ -3,7 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") apply false
     id("io.spring.dependency-management")
-//    id("org.jlleitschuh.gradle.ktlint") apply false
+    id("org.jlleitschuh.gradle.ktlint") apply false
     id("io.kotest") apply false
     kotlin("jvm")
     kotlin("kapt")
@@ -34,7 +34,7 @@ subprojects {
     apply(plugin = "org.jetbrains.kotlin.kapt")
     apply(plugin = "org.jetbrains.kotlin.plugin.spring")
     apply(plugin = "org.jetbrains.kotlin.plugin.jpa")
-//    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
     apply(plugin = "io.kotest")
 
     dependencyManagement {
@@ -72,7 +72,6 @@ subprojects {
         }
     }
 }
-
 
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
