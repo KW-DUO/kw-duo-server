@@ -21,7 +21,7 @@ import java.time.LocalDateTime
 @RestController
 class PostController {
     @Operation(summary = "팀원 찾기 글 조회")
-    @GetMapping("/find-teammate-posts")
+    @GetMapping("/posts/find-teammate")
     fun getFindTeammatePosts(
         @RequestParam(required = false) q: String?,
         @RequestParam(required = false) projectType: String?,
@@ -100,7 +100,7 @@ class PostController {
     }
 
     @Operation(summary = "팀 찾기 글 조회")
-    @GetMapping("/find-team-posts")
+    @GetMapping("/posts/find-team")
     fun getFindTeamPosts(
         @RequestParam(required = false) q: String?,
         @RequestParam(required = false) projectType: String?,
