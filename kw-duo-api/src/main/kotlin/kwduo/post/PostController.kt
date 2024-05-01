@@ -3,6 +3,7 @@ package kwduo.post
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
+import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import kwduo.annotation.NeedLogin
 import kwduo.member.schema.AuthorSchema
@@ -40,7 +41,7 @@ class PostController {
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         if (q == "i dont want see") {
             return PostSummaryResponseDTO(posts = emptyList())
@@ -119,7 +120,7 @@ class PostController {
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         return PostSummaryResponseDTO(
             posts =

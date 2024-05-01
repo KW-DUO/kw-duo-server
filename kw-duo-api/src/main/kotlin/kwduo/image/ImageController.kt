@@ -1,6 +1,7 @@
 package kwduo.image
 
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.annotation.NeedLogin
 import kwduo.image.dto.ImageUploadResponseDTO
 import org.springframework.http.MediaType
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestPart
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.multipart.MultipartFile
 
+@Tag(name = "Image")
 @RestController
 class ImageController {
     @NeedLogin
