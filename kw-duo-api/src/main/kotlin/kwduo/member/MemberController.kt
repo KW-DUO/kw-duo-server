@@ -4,7 +4,10 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.annotation.NeedLogin
 import kwduo.member.dto.MemberInfoResponseDTO
+import kwduo.member.dto.MemberInfoUpdateRequestDTO
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
 @Tag(name = "Member")
@@ -26,5 +29,14 @@ class MemberController {
             bio = "안녕하세요. 개발의 왕 김개발입니다. 잘 부탁드립니다.",
             githubUrl = "https://github.com/google",
         )
+    }
+
+    @NeedLogin
+    @Operation(summary = "회원 정보 수정")
+    @PostMapping("/members/info")
+    fun updateMemberInfo(
+        @RequestBody request: MemberInfoUpdateRequestDTO,
+    ) {
+        // 회원 정보 수정 로직
     }
 }
