@@ -15,9 +15,11 @@ import kwduo.post.dto.PostWriteResponseDTO
 import kwduo.post.schema.BookmarkSchema
 import kwduo.post.schema.PostDetailSchema
 import kwduo.post.schema.PostSummarySchema
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -255,6 +257,16 @@ class PostController {
     }
 
     @NeedLogin
+    @Operation(summary = "팀원 찾기 글 수정")
+    @PutMapping("/posts/find-teammate/{postId}")
+    fun updateFindTeammatePost(
+        @PathVariable postId: Long,
+        @RequestBody request: FindTeammatePostWriteRequestDTO,
+    ) {
+        // 글 수정 로직
+    }
+
+    @NeedLogin
     @Operation(summary = "팀 찾기 글 작성")
     @PostMapping("/posts/find-team")
     fun createFindTeamPost(
@@ -263,5 +275,33 @@ class PostController {
         return PostWriteResponseDTO(
             postId = 2,
         )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 수정")
+    @PutMapping("/posts/find-team/{postId}")
+    fun updateFindTeamPost(
+        @PathVariable postId: Long,
+        @RequestBody request: FindTeamPostWriteRequestDTO,
+    ) {
+        // 글 수정 로직
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 모집 마감")
+    @PostMapping("/posts/{postId}/close")
+    fun closePost(
+        @PathVariable postId: Long,
+    ) {
+        // 글 모집 마감 로직
+    }
+
+    @NeedLogin
+    @Operation(summary = "글 삭제")
+    @DeleteMapping("/posts/{postId}")
+    fun deletePost(
+        @PathVariable postId: Long,
+    ) {
+        // 글 삭제 로직
     }
 }
