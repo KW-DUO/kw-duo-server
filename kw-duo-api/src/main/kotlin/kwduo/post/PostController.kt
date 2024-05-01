@@ -4,15 +4,21 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import jakarta.validation.constraints.Min
+import kwduo.annotation.NeedLogin
 import kwduo.member.schema.AuthorSchema
 import kwduo.member.schema.MemberSummarySchema
+import kwduo.post.dto.FindTeamPostWriteRequestDTO
+import kwduo.post.dto.FindTeammatePostWriteRequestDTO
 import kwduo.post.dto.PostApplicantResponseDTO
 import kwduo.post.dto.PostSummaryResponseDTO
+import kwduo.post.dto.PostWriteResponseDTO
 import kwduo.post.schema.BookmarkSchema
 import kwduo.post.schema.PostDetailSchema
 import kwduo.post.schema.PostSummarySchema
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
@@ -234,6 +240,28 @@ class PostController {
                         techStack = emptyList(),
                     ),
                 ),
+        )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀원 찾기 글 작성")
+    @PostMapping("/posts/find-teammate")
+    fun createFindTeammatePost(
+        @RequestBody request: FindTeammatePostWriteRequestDTO,
+    ): PostWriteResponseDTO {
+        return PostWriteResponseDTO(
+            postId = 1,
+        )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 작성")
+    @PostMapping("/posts/find-team")
+    fun createFindTeamPost(
+        @RequestBody request: FindTeamPostWriteRequestDTO,
+    ): PostWriteResponseDTO {
+        return PostWriteResponseDTO(
+            postId = 2,
         )
     }
 }
