@@ -8,6 +8,7 @@ data class PostDetailSchema(
     val postType: String,
     val projectType: String,
     val title: String,
+    val content: String,
     val department: String?,
     val `class`: String?,
     val wantedPosition: List<String>,
