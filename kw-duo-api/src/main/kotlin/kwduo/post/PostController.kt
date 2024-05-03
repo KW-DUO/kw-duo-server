@@ -3,16 +3,25 @@ package kwduo.post
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
+import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
+import kwduo.annotation.NeedLogin
 import kwduo.member.schema.AuthorSchema
 import kwduo.member.schema.MemberSummarySchema
+import kwduo.post.dto.FindTeamPostWriteRequestDTO
+import kwduo.post.dto.FindTeammatePostWriteRequestDTO
 import kwduo.post.dto.PostApplicantResponseDTO
 import kwduo.post.dto.PostSummaryResponseDTO
+import kwduo.post.dto.PostWriteResponseDTO
 import kwduo.post.schema.BookmarkSchema
 import kwduo.post.schema.PostDetailSchema
 import kwduo.post.schema.PostSummarySchema
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.time.LocalDateTime
@@ -32,7 +41,7 @@ class PostController {
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         if (q == "i dont want see") {
             return PostSummaryResponseDTO(posts = emptyList())
@@ -111,7 +120,7 @@ class PostController {
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
         @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         return PostSummaryResponseDTO(
             posts =
@@ -235,5 +244,65 @@ class PostController {
                     ),
                 ),
         )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀원 찾기 글 작성")
+    @PostMapping("/posts/find-teammate")
+    fun createFindTeammatePost(
+        @RequestBody request: FindTeammatePostWriteRequestDTO,
+    ): PostWriteResponseDTO {
+        return PostWriteResponseDTO(
+            postId = 1,
+        )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀원 찾기 글 수정")
+    @PutMapping("/posts/find-teammate/{postId}")
+    fun updateFindTeammatePost(
+        @PathVariable postId: Long,
+        @RequestBody request: FindTeammatePostWriteRequestDTO,
+    ) {
+        // 글 수정 로직
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 작성")
+    @PostMapping("/posts/find-team")
+    fun createFindTeamPost(
+        @RequestBody request: FindTeamPostWriteRequestDTO,
+    ): PostWriteResponseDTO {
+        return PostWriteResponseDTO(
+            postId = 2,
+        )
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 수정")
+    @PutMapping("/posts/find-team/{postId}")
+    fun updateFindTeamPost(
+        @PathVariable postId: Long,
+        @RequestBody request: FindTeamPostWriteRequestDTO,
+    ) {
+        // 글 수정 로직
+    }
+
+    @NeedLogin
+    @Operation(summary = "팀 찾기 글 모집 마감")
+    @PostMapping("/posts/{postId}/close")
+    fun closePost(
+        @PathVariable postId: Long,
+    ) {
+        // 글 모집 마감 로직
+    }
+
+    @NeedLogin
+    @Operation(summary = "글 삭제")
+    @DeleteMapping("/posts/{postId}")
+    fun deletePost(
+        @PathVariable postId: Long,
+    ) {
+        // 글 삭제 로직
     }
 }
