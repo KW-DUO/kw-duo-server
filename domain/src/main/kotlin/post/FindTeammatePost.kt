@@ -1,6 +1,7 @@
 package post
 
 import member.Position
+import member.TechStack
 
 class FindTeammatePost(
     id: Long? = null,
@@ -10,6 +11,7 @@ class FindTeammatePost(
     projectType: ProjectType,
     interestingField: List<Field>,
     wantedPosition: List<Position>,
+    techStack: List<TechStack>,
     var recruitNumber: Int,
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
@@ -21,6 +23,7 @@ class FindTeammatePost(
         projectType = projectType,
         interestingField = interestingField,
         wantedPosition = wantedPosition,
+        techStack = techStack,
         isDeleted = isDeleted,
         isClosed = isClosed,
     )

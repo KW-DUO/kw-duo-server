@@ -25,12 +25,6 @@ abstract class PostEntity(
     @Enumerated(EnumType.STRING)
     @Column(name = "project_type")
     var projectType: ProjectType,
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "interesting_field")
-//    var interestingField: List<Field>,
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "wanted_position")
-//    var wantedPosition: List<Position>,
     @Column(name = "is_deleted", nullable = false)
     var isDeleted: Boolean = false,
     @Column(name = "is_closed", nullable = false)

@@ -25,8 +25,6 @@ class MemberEntity(
     @Enumerated(EnumType.STRING)
     @Column(name = "department", nullable = false)
     var department: Department,
-//    @Column(name = "tech_stack", nullable = false)
-//    var techStack: List<String>,
     @Enumerated(EnumType.STRING)
     @Column(name = "position", nullable = false)
     var position: Position,
