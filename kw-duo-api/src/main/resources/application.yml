@@ -6,6 +6,7 @@ spring:
     import:
       - logging.yml
       - db.yml
+      - jwt.yml
 
 springdoc:
   swagger-ui:

@@ -1,10 +1,11 @@
 rootProject.name = "kwduo"
 
-include (
+include(
     "kw-duo-api",
     "domain",
     "storage:db",
     "support:logging",
+    "support:jwt",
 )
 
 pluginManagement {
@@ -16,7 +17,7 @@ pluginManagement {
 
     resolutionStrategy {
         eachPlugin {
-            when(requested.id.id) {
+            when (requested.id.id) {
                 "org.jetbrains.kotlin.jvm" -> useVersion(kotlinVersion)
                 "org.jetbrains.kotlin.kapt" -> useVersion(kotlinVersion)
                 "org.jetbrains.kotlin.plugin.spring" -> useVersion(kotlinVersion)

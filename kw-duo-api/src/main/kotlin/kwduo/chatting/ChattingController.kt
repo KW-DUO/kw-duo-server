@@ -3,6 +3,7 @@ package kwduo.chatting
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
+import jakarta.validation.constraints.Max
 import jakarta.validation.constraints.Min
 import kwduo.chatting.dto.ChatResponseDTO
 import kwduo.chatting.dto.ChattingRoomResponseDTO
@@ -23,7 +24,7 @@ class ChattingController {
     fun getChattingRoomList(
         @RequestParam(name = "q", required = false) nickname: String?,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): ChattingRoomResponseDTO {
         if (nickname == "i dont want see") {
             return ChattingRoomResponseDTO(room = emptyList(), hasMore = false)
@@ -45,7 +46,13 @@ class ChattingController {
                     ),
                     ChattingRoomSchema(
                         id = 2,
-                        member = ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                        member =
+                            ChatMemberSchema(
+                                2,
+                                "Faker",
+                                "https://avatars.githubusercontent.com/u/12345678?v=4",
+                                "Ruby1",
+                            ),
                         lastChat =
                             ChatSchema(
                                 2,
@@ -64,7 +71,7 @@ class ChattingController {
     fun getChats(
         @PathVariable roomId: Long,
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): ChatResponseDTO {
         return ChatResponseDTO(
             listOf(
