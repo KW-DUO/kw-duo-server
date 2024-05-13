@@ -322,7 +322,14 @@ class PostController(
         @PathVariable postId: Long,
         @RequestBody request: FindTeamPostWriteRequestDTO,
     ) {
-        // 글 수정 로직
+        val requestMemberId = 1L
+
+//        postService.updatePostDetail(
+//            requestMemberId = requestMemberId,
+//            postId = postId,
+//            title = request.title,
+//            content = request.content,
+//        )
     }
 
     @NeedLogin
@@ -331,7 +338,12 @@ class PostController(
     fun closePost(
         @PathVariable postId: Long,
     ) {
-        // 글 모집 마감 로직
+        val requestMemberId = 1L
+
+        postService.closePost(
+            requestMemberId = requestMemberId,
+            postId = postId,
+        )
     }
 
     @NeedLogin

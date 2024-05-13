@@ -28,7 +28,7 @@ class MemberRepositoryImpl(
     override fun findById(id: Long): Member? {
         val memberEntity =
             memberJpaRepository.findByIdOrNull(id)
-                ?: throw MemberNotFoundException()
+                ?: return null
 
         val techStacks = techStackJpaRepository.findByMemberId(id)
 

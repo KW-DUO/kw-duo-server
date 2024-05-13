@@ -1,6 +1,5 @@
 package kwduo.post
 
-import kwduo.post.exception.PostNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -69,7 +68,7 @@ class PostRepositoryImpl(
     override fun findById(id: Long): Post? {
         val post =
             postJpaRepository.findByIdOrNull(id)
-                ?: throw PostNotFoundException()
+                ?: return null
 
         val fields = interestingFieldJpaRepository.findByPostId(id)
         val techStack = techStackJpaRepository.findByPostId(id)
