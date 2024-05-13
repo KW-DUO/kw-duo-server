@@ -5,6 +5,7 @@ spring:
   config:
     import:
       - logging.yml
+      - db.yml
       - jwt.yml
 
 springdoc:

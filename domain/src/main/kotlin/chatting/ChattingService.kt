@@ -1,8 +1,10 @@
 package chatting
 
 import member.Member
+import org.springframework.stereotype.Service
 import post.FindTeammatePost
 
+@Service
 class ChattingService(
     private val chatRepository: ChatRepository,
     private val chattingRoomRepository: ChattingRoomRepository,
@@ -11,7 +13,7 @@ class ChattingService(
         teamJoiner: Member,
         teamOwner: Member,
     ): ChattingRoom {
-        return chattingRoomRepository.findByParticipantMemberId(teamJoiner.id!!, teamOwner.id!!)
+        return chattingRoomRepository.findByParticipantMembersId(teamJoiner.id!!, teamOwner.id!!)
             ?: return createChattingRoom(teamJoiner, teamOwner)
     }
 

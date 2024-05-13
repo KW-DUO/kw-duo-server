@@ -2,6 +2,7 @@ package post
 
 import member.Member
 import member.Position
+import member.TechStack
 import member.exception.MemberNotAuthorizedException
 import java.time.LocalDateTime
 
@@ -13,6 +14,7 @@ abstract class Post(
     val projectType: ProjectType,
     val interestingField: List<Field>,
     val wantedPosition: List<Position>,
+    var techStack: List<TechStack>,
     var isDeleted: Boolean = false,
     var isClosed: Boolean = false,
     val createdAt: LocalDateTime = LocalDateTime.now(),

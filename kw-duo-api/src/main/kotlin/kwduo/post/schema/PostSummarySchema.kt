@@ -11,6 +11,7 @@ data class PostSummarySchema(
     val department: String,
     val `class`: String?,
     val wantedPosition: List<String>,
+    val wantedField: List<String>,
     val author: AuthorSchema,
     val bookmark: BookmarkSchema,
     val techStack: List<String>,
