@@ -45,10 +45,10 @@ class PostController(
         @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         if (q == "i dont want see") {
-            return PostSummaryResponseDTO(posts = emptyList(), 3)
+            return PostSummaryResponseDTO(posts = emptyList(), 32, 3, 3)
         }
 
-        return PostSummaryResponseDTO(DummyPosts.postSummary, 3)
+        return PostSummaryResponseDTO(DummyPosts.postSummary, 32, 3, 3)
     }
 
     @Operation(summary = "팀 찾기 글 조회")
@@ -65,7 +65,7 @@ class PostController(
         @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
         @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
-        return PostSummaryResponseDTO(DummyPosts.postSummary, 5)
+        return PostSummaryResponseDTO(DummyPosts.postSummary, 51, 1, 32)
     }
 
     @Operation(summary = "글 상세 조회")
