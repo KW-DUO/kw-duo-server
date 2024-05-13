@@ -76,9 +76,4 @@ class PostRepositoryImpl(
 
         return postMapper.toDomain(post, fields, techStack, wantedPositions)
     }
-
-    @Transactional(readOnly = true)
-    override fun findAll(): List<Post> {
-        TODO("Not yet implemented")
-    }
 }
