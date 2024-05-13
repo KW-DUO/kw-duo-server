@@ -1,7 +1,7 @@
 package kwduo.post
 
 enum class ProjectType(
-    private val value: String,
+    val value: String,
 ) {
     SIDE_PROJECT("SIDE_PROJECT"),
     CLASS_PROJECT("CLASS_PROJECT"),
