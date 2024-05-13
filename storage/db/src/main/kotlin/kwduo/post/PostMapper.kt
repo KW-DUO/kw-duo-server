@@ -17,7 +17,7 @@ class PostMapper {
         }
     }
 
-    private fun toFindTeamPostDomain(
+    fun toFindTeamPostDomain(
         post: FindTeamPostEntity,
         fields: List<PostInterestingFieldEntity>,
         techStack: List<PostTechStackEntity>,
@@ -36,7 +36,7 @@ class PostMapper {
         createdAt = post.writtenAt,
     )
 
-    private fun toFindTeammatePostDomain(
+    fun toFindTeammatePostDomain(
         post: FindTeammatePostEntity,
         fields: List<PostInterestingFieldEntity>,
         techStack: List<PostTechStackEntity>,
@@ -56,15 +56,7 @@ class PostMapper {
         createdAt = post.writtenAt,
     )
 
-    fun toEntity(post: Post): PostEntity {
-        return when (post) {
-            is FindTeammatePost -> toFindTeammatePostEntity(post)
-            is FindTeamPost -> toFindTeamPostEntity(post)
-            else -> throw IllegalArgumentException("Unknown post type")
-        }
-    }
-
-    private fun toFindTeammatePostEntity(post: FindTeammatePost) =
+    fun toFindTeammatePostEntity(post: FindTeammatePost) =
         FindTeammatePostEntity(
             id = post.id,
             title = post.title,
@@ -77,7 +69,7 @@ class PostMapper {
             writtenAt = post.createdAt,
         )
 
-    private fun toFindTeamPostEntity(post: FindTeamPost) =
+    fun toFindTeamPostEntity(post: FindTeamPost) =
         FindTeamPostEntity(
             id = post.id,
             title = post.title,
@@ -89,18 +81,24 @@ class PostMapper {
             writtenAt = post.createdAt,
         )
 
-    fun toInterestingFieldEntity(post: Post) =
-        post.interestingField.map {
-            PostInterestingFieldEntity(post.id!!, it)
-        }
+    fun toInterestingFieldEntity(
+        post: Post,
+        postId: Long?,
+    ) = post.interestingField.map {
+        PostInterestingFieldEntity(postId ?: post.id!!, it)
+    }
 
-    fun toTechStackEntity(post: Post) =
-        post.techStack.map {
-            PostTechStackEntity(post.id!!, it)
-        }
+    fun toTechStackEntity(
+        post: Post,
+        postId: Long?,
+    ) = post.techStack.map {
+        PostTechStackEntity(postId ?: post.id!!, it)
+    }
 
-    fun toPositionEntity(post: Post) =
-        post.wantedPosition.map {
-            PostWantedPositionEntity(post.id!!, it)
-        }
+    fun toPositionEntity(
+        post: Post,
+        postId: Long?,
+    ) = post.wantedPosition.map {
+        PostWantedPositionEntity(postId ?: post.id!!, it)
+    }
 }

@@ -8,7 +8,9 @@ import jakarta.validation.constraints.Min
 import kwduo.annotation.NeedLogin
 import kwduo.member.schema.AuthorSchema
 import kwduo.member.schema.MemberSummarySchema
+import kwduo.post.dto.FindTeamPostWriteRequest
 import kwduo.post.dto.FindTeamPostWriteRequestDTO
+import kwduo.post.dto.FindTeammatePostWriteRequest
 import kwduo.post.dto.FindTeammatePostWriteRequestDTO
 import kwduo.post.dto.PostApplicantResponseDTO
 import kwduo.post.dto.PostSummaryResponseDTO
@@ -28,7 +30,9 @@ import java.time.LocalDateTime
 
 @Tag(name = "Post")
 @RestController
-class PostController {
+class PostController(
+    private val postService: PostService,
+) {
     @Operation(summary = "팀원 찾기 글 조회")
     @GetMapping("/posts/find-teammate")
     fun getFindTeammatePosts(
@@ -258,9 +262,23 @@ class PostController {
     fun createFindTeammatePost(
         @RequestBody request: FindTeammatePostWriteRequestDTO,
     ): PostWriteResponseDTO {
-        return PostWriteResponseDTO(
-            postId = 1,
-        )
+        val requestMemberId = 1L
+
+        val post =
+            postService.writeFindTeammatePost(
+                FindTeammatePostWriteRequest(
+                    title = request.title,
+                    content = request.content,
+                    authorId = requestMemberId,
+                    projectType = request.projectType,
+                    interestingField = request.interestingField,
+                    wantedPosition = request.wantedPosition,
+                    techStack = request.techStack,
+                    recruitNumber = request.recruitNumber,
+                ),
+            )
+
+        return PostWriteResponseDTO(post.id!!)
     }
 
     @NeedLogin
@@ -279,9 +297,22 @@ class PostController {
     fun createFindTeamPost(
         @RequestBody request: FindTeamPostWriteRequestDTO,
     ): PostWriteResponseDTO {
-        return PostWriteResponseDTO(
-            postId = 2,
-        )
+        val requestMemberId = 1L
+
+        val post =
+            postService.writeFindTeamPost(
+                FindTeamPostWriteRequest(
+                    title = request.title,
+                    content = request.content,
+                    authorId = requestMemberId,
+                    projectType = request.projectType,
+                    interestingField = request.interestingField,
+                    wantedPosition = request.wantedPosition,
+                    techStack = request.techStack,
+                ),
+            )
+
+        return PostWriteResponseDTO(post.id!!)
     }
 
     @NeedLogin

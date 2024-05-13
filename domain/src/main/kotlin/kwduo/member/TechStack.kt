@@ -32,7 +32,7 @@ enum class TechStack(
 
     companion object {
         fun of(displayName: String): TechStack {
-            return entries.first { it.displayName == displayName }
+            return entries.first { it.name == displayName }
         }
     }
 }

@@ -20,4 +20,14 @@ class MemberAuthController(
 //        memberService.join(request.toRequest())
         // TODO: 액세스 토큰 내리기
     }
+
+    @Operation(summary = "로그인")
+    @PostMapping("/members/login")
+    fun login() {
+    }
+
+    @Operation(summary = "테스트용 로그인", description = "강제로 로그인합니다")
+    @PostMapping("/members/login/test")
+    fun loginForTest() {
+    }
 }

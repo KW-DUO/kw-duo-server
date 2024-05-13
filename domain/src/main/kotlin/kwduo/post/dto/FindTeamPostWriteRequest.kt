@@ -3,10 +3,10 @@ package kwduo.post.dto
 import kwduo.member.Position
 import kwduo.member.TechStack
 import kwduo.post.Field
-import kwduo.post.FindTeammatePost
+import kwduo.post.FindTeamPost
 import kwduo.post.ProjectType
 
-data class FindTeammatePostWriteRequest(
+class FindTeamPostWriteRequest(
     val title: String,
     val content: String,
     val authorId: Long,
@@ -14,10 +14,9 @@ data class FindTeammatePostWriteRequest(
     val interestingField: List<String>,
     val wantedPosition: List<String>,
     val techStack: List<String>,
-    val recruitNumber: Int,
 ) {
     fun toPost() =
-        FindTeammatePost(
+        FindTeamPost(
             title = title,
             content = content,
             authorId = authorId,
@@ -25,6 +24,5 @@ data class FindTeammatePostWriteRequest(
             interestingField = interestingField.map { Field.valueOf(it) },
             wantedPosition = wantedPosition.map { Position.of(it) },
             techStack = techStack.map { TechStack.of(it) },
-            recruitNumber = recruitNumber,
         )
 }

@@ -11,6 +11,6 @@ enum class Position(
     ;
 
     companion object {
-        fun of(position: String) = entries.first { it.displayName == position }
+        fun of(position: String) = entries.first { it.name == position }
     }
 }
