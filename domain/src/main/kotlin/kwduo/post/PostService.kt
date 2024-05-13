@@ -1,7 +1,9 @@
 package kwduo.post
 
 import kwduo.member.Member
+import org.springframework.stereotype.Service
 
+@Service
 class PostService(
     private val postRepository: PostRepository,
 ) {
