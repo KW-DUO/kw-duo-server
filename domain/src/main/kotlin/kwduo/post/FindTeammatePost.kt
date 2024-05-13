@@ -2,6 +2,7 @@ package kwduo.post
 
 import kwduo.member.Position
 import kwduo.member.TechStack
+import java.time.LocalDateTime
 
 class FindTeammatePost(
     id: Long? = null,
@@ -15,6 +16,7 @@ class FindTeammatePost(
     var recruitNumber: Int,
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
+    createdAt: LocalDateTime = LocalDateTime.now(),
 ) : Post(
         id = id,
         title = title,
@@ -26,4 +28,5 @@ class FindTeammatePost(
         techStack = techStack,
         isDeleted = isDeleted,
         isClosed = isClosed,
+        createdAt = createdAt,
     )
