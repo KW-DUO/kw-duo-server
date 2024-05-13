@@ -6,6 +6,4 @@ interface MemberRepository {
     fun findById(id: Long): Member?
 
     fun findByNickname(nickname: String): Member?
-
-    fun findByTechStack(stack: String): List<Member>
 }

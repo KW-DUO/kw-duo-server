@@ -11,6 +11,7 @@ import java.time.LocalDateTime
 @Table(name = "member")
 @Entity
 class MemberEntity(
+    id: Long? = null,
     @Column(name = "oauth_id", nullable = false)
     val oAuthId: String,
     @Column(name = "profile_img_id", nullable = true)
@@ -27,6 +28,7 @@ class MemberEntity(
     var position: Position,
     @Column(name = "email", nullable = false)
     var email: String,
+    @Column(name = "is_authenticated", nullable = false)
     var isAuthenticated: Boolean = false,
     @Column(name = "github_url", nullable = true)
     var githubUrl: String?,
@@ -36,4 +38,6 @@ class MemberEntity(
     var tier: BaekjoonTier? = null,
     @Column(name = "tier_updated_at", nullable = false)
     var tierUpdatedAt: LocalDateTime? = LocalDateTime.now(),
-) : BaseEntity()
+    @Column(name = "join_at", nullable = false)
+    var joinAt: LocalDateTime,
+) : BaseEntity(id)

@@ -10,7 +10,7 @@ class Member(
     var nickname: String,
     var bio: String,
     val department: Department,
-    private var techStack: List<TechStack>,
+    var techStack: List<TechStack>,
     var position: Position,
     private var emailInfo: KwEmailInfo,
     var githubUrl: String?,
