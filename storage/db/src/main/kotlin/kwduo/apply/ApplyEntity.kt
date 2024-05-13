@@ -8,8 +8,9 @@ import kwduo.BaseEntity
 @Table(name = "apply")
 @Entity
 class ApplyEntity(
+    id: Long?,
     @Column(name = "member_id", nullable = false)
     var memberId: Long,
     @Column(name = "post_id", nullable = false)
     var postId: Long,
-) : BaseEntity()
+) : BaseEntity(id)
