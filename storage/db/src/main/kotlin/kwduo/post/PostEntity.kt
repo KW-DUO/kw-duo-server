@@ -9,7 +9,6 @@ import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import post.ProjectType
 
 @DiscriminatorColumn(name = "post_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

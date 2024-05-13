@@ -6,9 +6,6 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import member.BaekjoonTier
-import member.Department
-import member.Position
 import java.time.LocalDateTime
 
 @Table(name = "member")

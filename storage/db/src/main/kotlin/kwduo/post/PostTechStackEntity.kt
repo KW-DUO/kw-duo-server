@@ -6,7 +6,7 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import member.TechStack
+import kwduo.member.TechStack
 
 @Table(name = "post_tech_stack")
 @Entity

@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import kwduo.TokenProvider
 import kwduo.annotation.NeedLogin
-import member.exception.MemberNotAuthorizedException
+import kwduo.member.exception.MemberNotAuthorizedException
 import org.springframework.stereotype.Component
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.HandlerInterceptor

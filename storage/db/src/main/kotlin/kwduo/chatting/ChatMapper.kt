@@ -1,6 +1,5 @@
 package kwduo.chatting
 
-import chatting.Chat
 import org.springframework.stereotype.Component
 
 @Component
