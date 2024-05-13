@@ -9,6 +9,7 @@ import java.time.LocalDateTime
 @Table(name = "chatting_room")
 @Entity
 class ChattingRoomEntity(
+    id: Long?,
     @Column(name = "member1_id", nullable = false)
     var member1Id: Long,
     @Column(name = "member2_id", nullable = false)
@@ -17,4 +18,4 @@ class ChattingRoomEntity(
     var member1LastReadMessageTime: LocalDateTime,
     @Column(name = "member2_last_read_message_time", nullable = false)
     var member2LastReadMessageTime: LocalDateTime,
-) : BaseEntity()
+) : BaseEntity(id)

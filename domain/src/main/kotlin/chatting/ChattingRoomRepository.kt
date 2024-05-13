@@ -5,10 +5,10 @@ interface ChattingRoomRepository {
 
     fun findById(id: Long): ChattingRoom?
 
-    fun findByParticipantMemberId(
+    fun findByParticipantMembersId(
         member1Id: Long,
         member2Id: Long,
     ): ChattingRoom?
 
-    fun findChattingRoomByParticipantMemberId(memberId: Long): List<ChattingRoom>
+    fun findByParticipantMemberId(memberId: Long): List<ChattingRoom>
 }
