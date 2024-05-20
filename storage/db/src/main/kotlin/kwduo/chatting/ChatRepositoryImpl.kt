@@ -1,7 +1,5 @@
 package kwduo.chatting
 
-import chatting.Chat
-import chatting.ChatRepository
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
 

@@ -6,7 +6,6 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import post.Field
 
 @Table(name = "post_interesting_field")
 @Entity

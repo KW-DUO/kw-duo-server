@@ -3,11 +3,12 @@ package kwduo.post
 import jakarta.persistence.Column
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
-import post.ProjectType
+import java.time.LocalDateTime
 
 @DiscriminatorValue("FIND_TEAMMATE")
 @Entity
 class FindTeammatePostEntity(
+    id: Long?,
     title: String,
     content: String,
     authorId: Long,
@@ -16,11 +17,14 @@ class FindTeammatePostEntity(
     var recruitNumber: Int,
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
+    writtenAt: LocalDateTime,
 ) : PostEntity(
+        id,
         title,
         content,
         authorId,
         projectType,
         isDeleted,
         isClosed,
+        writtenAt,
     )

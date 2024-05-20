@@ -6,7 +6,7 @@ import jakarta.persistence.EnumType
 import jakarta.persistence.Enumerated
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import member.Position
+import kwduo.member.Position
 
 @Table(name = "post_wanted_position")
 @Entity

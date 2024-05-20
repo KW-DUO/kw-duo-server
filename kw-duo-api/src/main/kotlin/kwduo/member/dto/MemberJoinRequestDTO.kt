@@ -1,7 +1,5 @@
 package kwduo.member.dto
 
-import member.dto.MemberJoinRequest
-
 data class MemberJoinRequestDTO(
     val oAuthId: String,
     val profileImgId: Long?,

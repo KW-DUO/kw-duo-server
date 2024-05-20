@@ -9,13 +9,14 @@ import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
 import jakarta.persistence.Table
 import kwduo.BaseEntity
-import post.ProjectType
+import java.time.LocalDateTime
 
 @DiscriminatorColumn(name = "post_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Table(name = "post")
 @Entity
 abstract class PostEntity(
+    id: Long? = null,
     @Column(name = "title", nullable = false, length = 100)
     var title: String,
     @Column(name = "content", nullable = false)
@@ -29,4 +30,6 @@ abstract class PostEntity(
     var isDeleted: Boolean = false,
     @Column(name = "is_closed", nullable = false)
     var isClosed: Boolean = false,
-) : BaseEntity()
+    @Column(name = "written_at", nullable = false)
+    var writtenAt: LocalDateTime,
+) : BaseEntity(id)
