@@ -2,7 +2,6 @@ package kwduo.member.dto
 
 data class MemberJoinRequestDTO(
     val oAuthId: String,
-    val profileImgId: Long?,
     val nickname: String,
     val department: String,
     val techStack: List<String>,
@@ -14,7 +13,6 @@ data class MemberJoinRequestDTO(
     fun toRequest() =
         MemberJoinRequest(
             oAuthId = oAuthId,
-            profileImgId = profileImgId,
             nickname = nickname,
             department = department,
             techStack = techStack,

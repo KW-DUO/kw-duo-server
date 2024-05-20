@@ -9,7 +9,6 @@ import kwduo.member.TechStack
 
 data class MemberJoinRequest(
     val oAuthId: String,
-    val profileImgId: Long?,
     val nickname: String,
     val department: String,
     val techStack: List<String>,
@@ -27,7 +26,7 @@ data class MemberJoinRequest(
 
         return Member(
             oAuthId = oAuthId,
-            profileImgId = profileImgId,
+            profileImgId = null,
             nickname = nickname,
             bio = "",
             department = Department.of(department),
