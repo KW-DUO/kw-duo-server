@@ -1,9 +1,6 @@
 package kwduo.bookmark
 
-import org.springframework.stereotype.Component
-
-@Component
-class BookmarkMapper {
+object BookmarkMapper {
     fun toEntity(bookmark: Bookmark) =
         BookmarkEntity(
             memberId = bookmark.memberId,

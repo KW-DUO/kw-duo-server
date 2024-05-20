@@ -9,19 +9,18 @@ import org.springframework.transaction.annotation.Transactional
 class MemberRepositoryImpl(
     private val memberJpaRepository: MemberJpaRepository,
     private val techStackJpaRepository: MemberTechStackJpaRepository,
-    private val memberMapper: MemberMapper,
 ) : MemberRepository {
     @Transactional
     override fun save(member: Member): Member {
-        val memberEntity = memberMapper.toMemberEntity(member)
-        val techStackEntities = memberMapper.toMemberStackEntity(member)
+        val memberEntity = MemberMapper.toMemberEntity(member)
+        val techStackEntities = MemberMapper.toMemberStackEntity(member)
 
         val savedMemberEntity = memberJpaRepository.save(memberEntity)
 
         techStackJpaRepository.deleteByMemberId(memberEntity.id!!)
         val savedTechStackEntities = techStackJpaRepository.saveAll(techStackEntities)
 
-        return memberMapper.toDomain(savedMemberEntity, savedTechStackEntities)
+        return MemberMapper.toDomain(savedMemberEntity, savedTechStackEntities)
     }
 
     @Transactional(readOnly = true)
@@ -32,7 +31,7 @@ class MemberRepositoryImpl(
 
         val techStacks = techStackJpaRepository.findByMemberId(id)
 
-        return memberMapper.toDomain(memberEntity, techStacks)
+        return MemberMapper.toDomain(memberEntity, techStacks)
     }
 
     @Transactional(readOnly = true)
@@ -43,6 +42,6 @@ class MemberRepositoryImpl(
 
         val techStacks = techStackJpaRepository.findByMemberId(memberEntity.id!!)
 
-        return memberMapper.toDomain(memberEntity, techStacks)
+        return MemberMapper.toDomain(memberEntity, techStacks)
     }
 }

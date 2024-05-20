@@ -1,9 +1,6 @@
 package kwduo.member
 
-import org.springframework.stereotype.Component
-
-@Component
-class MemberMapper {
+object MemberMapper {
     fun toDomain(
         memberEntity: MemberEntity,
         techStacks: List<MemberTechStackEntity>,

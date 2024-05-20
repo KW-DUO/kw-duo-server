@@ -1,9 +1,6 @@
 package kwduo.post
 
-import org.springframework.stereotype.Component
-
-@Component
-class PostMapper {
+object PostMapper {
     fun toDomain(
         post: PostEntity,
         fields: List<PostInterestingFieldEntity>,

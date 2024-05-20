@@ -5,15 +5,14 @@ import org.springframework.transaction.annotation.Transactional
 
 @Repository
 class BookmarkRepositoryImpl(
-    private val bookmarkMapper: BookmarkMapper,
     private val bookmarkJpaRepository: BookmarkJpaRepository,
 ) : BookmarkRepository {
     @Transactional
     override fun save(bookMark: Bookmark): Bookmark {
-        val bookmarkEntity = bookmarkMapper.toEntity(bookMark)
+        val bookmarkEntity = BookmarkMapper.toEntity(bookMark)
         val savedEntity = bookmarkJpaRepository.save(bookmarkEntity)
 
-        return bookmarkMapper.toDomain(savedEntity)
+        return BookmarkMapper.toDomain(savedEntity)
     }
 
     @Transactional(readOnly = true)
@@ -22,6 +21,6 @@ class BookmarkRepositoryImpl(
         postId: Long,
     ): Bookmark? {
         return bookmarkJpaRepository.findByMemberIdAndPostId(requestMemberId, postId)
-            ?.let { bookmarkMapper.toDomain(it) }
+            ?.let { BookmarkMapper.toDomain(it) }
     }
 }
