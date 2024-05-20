@@ -80,7 +80,11 @@ abstract class Post(
 
     private fun isAuthor(memberId: Long) = memberId == authorId
 
-    fun delete() {
+    fun delete(memberId: Long) {
+        if (!isAuthor(memberId)) {
+            throw MemberNotAuthorizedException("작성자만 삭제할 수 있습니다.")
+        }
+
         check(!isDeleted) { "이미 삭제된 게시글입니다." }
         isDeleted = true
     }

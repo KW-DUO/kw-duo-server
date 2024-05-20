@@ -59,4 +59,16 @@ class PostService(
         post.unClose(requestMemberId)
         postRepository.save(post)
     }
+
+    fun deletePost(
+        requestMemberId: Long,
+        postId: Long,
+    ) {
+        val post =
+            postRepository.findById(postId)
+                ?: throw PostNotFoundException()
+
+        post.delete(requestMemberId)
+        postRepository.save(post)
+    }
 }

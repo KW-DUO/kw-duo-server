@@ -206,5 +206,11 @@ class PostController(
         @PathVariable postId: Long,
     ) {
         // 글 삭제 로직
+        val requestMemberId = 1L
+
+        postService.deletePost(
+            requestMemberId = requestMemberId,
+            postId = postId,
+        )
     }
 }
