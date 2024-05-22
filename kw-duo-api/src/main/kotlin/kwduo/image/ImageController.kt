@@ -25,6 +25,6 @@ class ImageController {
     }
 
     private fun validateImage(image: MultipartFile) {
-        require(image.contentType?.startsWith("kwduo/image") != false) { "이미지 파일이 아닙니다." }
+        require(image.contentType?.startsWith("image") != false) { "이미지 파일이 아닙니다." }
     }
 }
