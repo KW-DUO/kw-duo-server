@@ -2,10 +2,8 @@ package kwduo.post
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.validation.Valid
-import jakarta.validation.constraints.Max
-import jakarta.validation.constraints.Min
 import kwduo.annotation.NeedLogin
+import kwduo.auth.LoggedInMemberReader
 import kwduo.member.schema.MemberSummarySchema
 import kwduo.post.dto.FindTeamPostWriteRequest
 import kwduo.post.dto.FindTeamPostWriteRequestDTO
@@ -40,9 +38,8 @@ class PostController(
         @RequestParam(required = false) position: String?,
         @RequestParam(required = false) wantedField: String?,
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
-        @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @RequestParam(required = false, defaultValue = "0") page: Int,
+        @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         if (q == "i dont want see") {
             return PostSummaryResponseDTO(posts = emptyList(), 32, 3, 3)
@@ -61,9 +58,8 @@ class PostController(
         @RequestParam(required = false) position: String?,
         @RequestParam(required = false) wantedField: String?,
         @RequestParam(required = false, defaultValue = "false") bookmarkOnly: Boolean,
-        @RequestParam(required = false, defaultValue = "false") notClosedOnly: Boolean,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @RequestParam(required = false, defaultValue = "0") page: Int,
+        @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
         return PostSummaryResponseDTO(DummyPosts.postSummary, 51, 1, 32)
     }
@@ -115,14 +111,12 @@ class PostController(
     fun createFindTeammatePost(
         @RequestBody request: FindTeammatePostWriteRequestDTO,
     ): PostWriteResponseDTO {
-        val requestMemberId = 1L
-
         val post =
             postService.writeFindTeammatePost(
                 FindTeammatePostWriteRequest(
                     title = request.title,
                     content = request.content,
-                    authorId = requestMemberId,
+                    authorId = LoggedInMemberReader.currentMemberId,
                     projectType = request.projectType,
                     interestingField = request.interestingField,
                     wantedPosition = request.wantedPosition,
@@ -150,14 +144,12 @@ class PostController(
     fun createFindTeamPost(
         @RequestBody request: FindTeamPostWriteRequestDTO,
     ): PostWriteResponseDTO {
-        val requestMemberId = 1L
-
         val post =
             postService.writeFindTeamPost(
                 FindTeamPostWriteRequest(
                     title = request.title,
                     content = request.content,
-                    authorId = requestMemberId,
+                    authorId = LoggedInMemberReader.currentMemberId,
                     projectType = request.projectType,
                     interestingField = request.interestingField,
                     wantedPosition = request.wantedPosition,
@@ -175,7 +167,7 @@ class PostController(
         @PathVariable postId: Long,
         @RequestBody request: FindTeamPostWriteRequestDTO,
     ) {
-        val requestMemberId = 1L
+        val requestMemberId = LoggedInMemberReader.currentMemberId
 
 //        postService.updatePostDetail(
 //            requestMemberId = requestMemberId,
@@ -191,10 +183,8 @@ class PostController(
     fun closePost(
         @PathVariable postId: Long,
     ) {
-        val requestMemberId = 1L
-
         postService.closePost(
-            requestMemberId = requestMemberId,
+            requestMemberId = LoggedInMemberReader.currentMemberId,
             postId = postId,
         )
     }
@@ -205,11 +195,8 @@ class PostController(
     fun deletePost(
         @PathVariable postId: Long,
     ) {
-        // 글 삭제 로직
-        val requestMemberId = 1L
-
         postService.deletePost(
-            requestMemberId = requestMemberId,
+            requestMemberId = LoggedInMemberReader.currentMemberId,
             postId = postId,
         )
     }
