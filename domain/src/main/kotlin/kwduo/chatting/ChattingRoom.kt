@@ -24,6 +24,11 @@ class ChattingRoom(
         }
     }
 
+    fun getOtherParticipantId(id: Long): Long {
+        require(isMember(id)) { "채팅방에 속한 멤버가 아닙니다." }
+        return if (id == member1Id) member2Id else member1Id
+    }
+
     companion object {
         fun create(
             teamJoinerId: Long,

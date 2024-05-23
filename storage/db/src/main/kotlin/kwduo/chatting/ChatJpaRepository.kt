@@ -12,4 +12,14 @@ interface ChatJpaRepository : JpaRepository<ChatEntity, Long> {
         """,
     )
     fun findByChattingRoomId(chattingRoomId: Long): List<ChatEntity>
+
+    @Query(
+        """
+          SELECT c FROM
+            ChatEntity c
+            WHERE c.chattingRoomId = :chattingRoomId
+            ORDER BY c.chatCreatedAt DESC
+        """,
+    )
+    fun findLastChatByChattingRoomId(chattingRoomId: Long): ChatEntity?
 }

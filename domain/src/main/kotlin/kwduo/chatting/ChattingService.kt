@@ -1,14 +1,55 @@
 package kwduo.chatting
 
+import kwduo.chatting.dto.ChattingRoomInfo
+import kwduo.image.ImageReader
 import kwduo.member.Member
+import kwduo.member.MemberReader
 import kwduo.post.FindTeammatePost
 import org.springframework.stereotype.Service
 
 @Service
 class ChattingService(
+    private val memberReader: MemberReader,
+    private val imageReader: ImageReader,
     private val chatRepository: ChatRepository,
     private val chattingRoomRepository: ChattingRoomRepository,
 ) {
+    fun getAllChattingRoom(memberId: Long): List<ChattingRoomInfo> {
+        val chattingRooms = chattingRoomRepository.findByParticipantMemberId(memberId)
+
+        return chattingRooms.map {
+            getChattingRoomInfo(it, memberId)
+        }
+    }
+
+    private fun getChattingRoomInfo(
+        chattingRoom: ChattingRoom,
+        memberId: Long,
+    ): ChattingRoomInfo {
+        val member = memberReader.findById(chattingRoom.getOtherParticipantId(memberId))
+        val memberProfileImg = member.profileImgId?.let { imageReader.findById(it) }
+
+        val lastChat = chatRepository.findLastChatByChattingRoomId(chattingRoom.id!!)
+
+        lastChat ?: return ChattingRoomInfo(
+            chattingRoom.id,
+            member,
+            memberProfileImg,
+        )
+
+        val lastChatMember = memberReader.findById(lastChat.sendMemberId)
+        val lastChatMemberProfileImg = imageReader.findById(lastChatMember.id!!)
+
+        return ChattingRoomInfo(
+            id = chattingRoom.id,
+            member = member,
+            memberProfileImg = memberProfileImg,
+            lastChat = lastChat,
+            lastChatMember = lastChatMember,
+            lastChatMemberProfileImg = lastChatMemberProfileImg,
+        )
+    }
+
     fun createOrGetChattingRoom(
         teamJoiner: Member,
         teamOwner: Member,

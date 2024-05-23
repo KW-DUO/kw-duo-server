@@ -2,9 +2,7 @@ package kwduo.chatting
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
-import jakarta.validation.Valid
-import jakarta.validation.constraints.Max
-import jakarta.validation.constraints.Min
+import kwduo.auth.LoggedInMemberReader
 import kwduo.chatting.dto.ChatResponseDTO
 import kwduo.chatting.dto.ChattingRoomResponseDTO
 import kwduo.chatting.schema.ChatMemberSchema
@@ -18,60 +16,67 @@ import java.time.LocalDateTime
 
 @Tag(name = "Chatting")
 @RestController
-class ChattingController {
+class ChattingController(
+    private val chattingService: ChattingService,
+) {
     @Operation(summary = "채팅방 목록 조회")
     @GetMapping("/chats")
     fun getChattingRoomList(
         @RequestParam(name = "q", required = false) nickname: String?,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
     ): ChattingRoomResponseDTO {
-        if (nickname == "i dont want see") {
-            return ChattingRoomResponseDTO(room = emptyList(), hasMore = false)
-        }
-
-        return ChattingRoomResponseDTO(
-            room =
+        if (nickname == "dummy") {
+            return ChattingRoomResponseDTO(
                 listOf(
                     ChattingRoomSchema(
-                        id = 1,
+                        1,
                         ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                        lastChat =
-                            ChatSchema(
-                                1,
-                                "안녕하세요",
-                                ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
-                                LocalDateTime.now(),
-                            ),
+                        ChatSchema(
+                            1,
+                            "안녕하세요",
+                            ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                            LocalDateTime.now(),
+                        ),
                     ),
                     ChattingRoomSchema(
-                        id = 2,
-                        member =
+                        2,
+                        ChatMemberSchema(
+                            2,
+                            "Faker",
+                            "https://avatars.githubusercontent.com/u/12345678?v=4",
+                            "RUBY1",
+                        ),
+                        ChatSchema(
+                            2,
+                            "중간고사 족보 삽니다",
                             ChatMemberSchema(
                                 2,
                                 "Faker",
                                 "https://avatars.githubusercontent.com/u/12345678?v=4",
-                                "Ruby1",
+                                "RUBY1",
                             ),
-                        lastChat =
-                            ChatSchema(
-                                2,
-                                "중간고사 족보 삽니다",
-                                ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
-                                LocalDateTime.now().minusDays(2),
-                            ),
+                            LocalDateTime.now().minusDays(2),
+                        ),
+                    ),
+                    ChattingRoomSchema(
+                        3,
+                        ChatMemberSchema(3, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                        null,
                     ),
                 ),
-            hasMore = false,
-        )
+            )
+        }
+
+        val chattingRooms = chattingService.getAllChattingRoom(LoggedInMemberReader.currentMemberId)
+
+        return ChattingRoomResponseDTO.of(chattingRooms)
     }
 
     @Operation(summary = "채팅방의 채팅 조회")
     @GetMapping("/chats/{roomId}")
     fun getChats(
         @PathVariable roomId: Long,
-        @Valid @Min(0) @RequestParam(required = false, defaultValue = "0") page: Int,
-        @Valid @Min(0) @Max(20) @RequestParam(required = false, defaultValue = "20") size: Int,
+        @RequestParam(required = false, defaultValue = "0") page: Int,
+        @RequestParam(required = false, defaultValue = "20") size: Int,
     ): ChatResponseDTO {
         return ChatResponseDTO(
             listOf(
@@ -84,13 +89,13 @@ class ChattingController {
                 ChatSchema(
                     2,
                     "안녕하세요",
-                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
                     LocalDateTime.now().minusDays(3),
                 ),
                 ChatSchema(
                     3,
                     "족보 삽니다",
-                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
                     LocalDateTime.now().minusDays(3),
                 ),
                 ChatSchema(
@@ -102,7 +107,7 @@ class ChattingController {
                 ChatSchema(
                     5,
                     "? ;;;",
-                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "Ruby1"),
+                    ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
                     LocalDateTime.now(),
                 ),
             ),
