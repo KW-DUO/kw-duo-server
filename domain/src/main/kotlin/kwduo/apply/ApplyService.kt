@@ -1,5 +1,8 @@
 package kwduo.apply
 
+import org.springframework.stereotype.Service
+
+@Service
 class ApplyService(
     private val applyRepository: ApplyRepository,
 ) {
