@@ -16,7 +16,7 @@ class MemberService(
     private val memberRepository: MemberRepository,
     private val eventPublisher: ApplicationEventPublisher,
 ) {
-    fun join(request: MemberJoinRequest) {
+    fun join(request: MemberJoinRequest): Member {
         val member = request.toMember()
 
 //        if (member.profileImgId != null) {
@@ -28,6 +28,8 @@ class MemberService(
         val savedMember = memberRepository.save(member)
 
         eventPublisher.publishEvent(MemberJoinEvent(savedMember))
+
+        return savedMember
     }
 
     fun updateInfo(

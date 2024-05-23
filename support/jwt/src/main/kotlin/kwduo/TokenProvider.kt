@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.security.Key
-import java.util.Date
+import java.util.*
 
 @Component
 class TokenProvider(
@@ -24,16 +24,14 @@ class TokenProvider(
         subject: String,
         authoritiesKey: String,
         authorities: String,
-        accessTokenExpireTime: Long,
-        refreshTokenExpireTime: Long,
     ): TokenDTO {
         val now = Date().time
 
         return TokenDTO(
-            makeAccessToken(subject, authoritiesKey, authorities, accessTokenExpireTime, now),
-            makeRefreshToken(subject, refreshTokenExpireTime, now),
-            accessTokenExpireTime,
-            refreshTokenExpireTime,
+            makeAccessToken(subject, authoritiesKey, authorities, ACCESS_TOKEN_EXPIRE_TIME, now),
+            makeRefreshToken(subject, REFRESH_TOKEN_EXPIRE_TIME, now),
+            ACCESS_TOKEN_EXPIRE_TIME,
+            REFRESH_TOKEN_EXPIRE_TIME,
         )
     }
 
@@ -59,4 +57,9 @@ class TokenProvider(
         .setExpiration(Date(now + refreshTokenExpireTime))
         .signWith(key, SignatureAlgorithm.HS512)
         .compact()
+
+    companion object {
+        private const val ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7L
+        private const val REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30L
+    }
 }
