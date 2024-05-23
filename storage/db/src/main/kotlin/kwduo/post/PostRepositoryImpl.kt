@@ -1,6 +1,5 @@
 package kwduo.post
 
-import kwduo.post.exception.PostNotFoundException
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Repository
 import org.springframework.transaction.annotation.Transactional
@@ -11,18 +10,50 @@ class PostRepositoryImpl(
     private val interestingFieldJpaRepository: PostInterestingFieldJpaRepository,
     private val wantedPositionJpaRepository: PostWantedPositionJpaRepository,
     private val techStackJpaRepository: PostTechStackJpaRepository,
-    private val postMapper: PostMapper,
 ) : PostRepository {
     @Transactional
     override fun save(post: Post): Post {
-        val postEntity = postMapper.toEntity(post)
+        return when (post) {
+            is FindTeammatePost -> saveFindTeammatePost(post)
+            is FindTeamPost -> saveFindTeamPost(post)
+            else -> throw IllegalArgumentException("Unknown post type")
+        }
+    }
 
-        val stacks = postMapper.toTechStackEntity(post)
-        val wantedPositions = postMapper.toPositionEntity(post)
-        val interestingFields = postMapper.toInterestingFieldEntity(post)
-
+    @Transactional
+    override fun saveFindTeammatePost(post: FindTeammatePost): FindTeammatePost {
+        val postEntity = PostMapper.toFindTeammatePostEntity(post)
         val savedPost = postJpaRepository.save(postEntity)
 
+        val stacks = PostMapper.toTechStackEntity(post, savedPost.id!!)
+        val wantedPositions = PostMapper.toPositionEntity(post, savedPost.id!!)
+        val interestingFields = PostMapper.toInterestingFieldEntity(post, savedPost.id!!)
+
+        savePostMetaData(postEntity, interestingFields, stacks, wantedPositions)
+
+        return PostMapper.toFindTeammatePostDomain(savedPost, interestingFields, stacks, wantedPositions)
+    }
+
+    @Transactional
+    override fun saveFindTeamPost(post: FindTeamPost): FindTeamPost {
+        val postEntity = PostMapper.toFindTeamPostEntity(post)
+        val savedPost = postJpaRepository.save(postEntity)
+
+        val stacks = PostMapper.toTechStackEntity(post, savedPost.id!!)
+        val wantedPositions = PostMapper.toPositionEntity(post, savedPost.id!!)
+        val interestingFields = PostMapper.toInterestingFieldEntity(post, savedPost.id!!)
+
+        savePostMetaData(postEntity, interestingFields, stacks, wantedPositions)
+
+        return PostMapper.toFindTeamPostDomain(savedPost, interestingFields, stacks, wantedPositions)
+    }
+
+    private fun savePostMetaData(
+        postEntity: PostEntity,
+        interestingFields: List<PostInterestingFieldEntity>,
+        stacks: List<PostTechStackEntity>,
+        wantedPositions: List<PostWantedPositionEntity>,
+    ) {
         interestingFieldJpaRepository.deleteByPostId(postEntity.id!!)
         techStackJpaRepository.deleteByPostId(postEntity.id!!)
         wantedPositionJpaRepository.deleteByPostId(postEntity.id!!)
@@ -30,25 +61,18 @@ class PostRepositoryImpl(
         interestingFieldJpaRepository.saveAll(interestingFields)
         techStackJpaRepository.saveAll(stacks)
         wantedPositionJpaRepository.saveAll(wantedPositions)
-
-        return postMapper.toDomain(savedPost, interestingFields, stacks, wantedPositions)
     }
 
     @Transactional(readOnly = true)
     override fun findById(id: Long): Post? {
         val post =
             postJpaRepository.findByIdOrNull(id)
-                ?: throw PostNotFoundException()
+                ?: return null
 
         val fields = interestingFieldJpaRepository.findByPostId(id)
         val techStack = techStackJpaRepository.findByPostId(id)
         val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
 
-        return postMapper.toDomain(post, fields, techStack, wantedPositions)
-    }
-
-    @Transactional(readOnly = true)
-    override fun findAll(): List<Post> {
-        TODO("Not yet implemented")
+        return PostMapper.toDomain(post, fields, techStack, wantedPositions)
     }
 }

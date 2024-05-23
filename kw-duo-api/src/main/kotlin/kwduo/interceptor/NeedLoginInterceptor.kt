@@ -2,7 +2,7 @@ package kwduo.interceptor
 
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
-import kwduo.TokenProvider
+import kwduo.TokenValidator
 import kwduo.annotation.NeedLogin
 import kwduo.member.exception.MemberNotAuthorizedException
 import org.springframework.stereotype.Component
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.HandlerInterceptor
 
 @Component
 class NeedLoginInterceptor(
-    private val tokenProvider: TokenProvider,
+    private val tokenValidator: TokenValidator,
 ) : HandlerInterceptor {
     override fun preHandle(
         request: HttpServletRequest,
@@ -31,7 +31,7 @@ class NeedLoginInterceptor(
 
     private fun hasValidAccessToken(request: HttpServletRequest): Boolean {
         return getAccessCookie(request)
-            ?.let { tokenProvider.validateToken(it) }
+            ?.let { tokenValidator.validateToken(it) }
             ?: false
     }
 

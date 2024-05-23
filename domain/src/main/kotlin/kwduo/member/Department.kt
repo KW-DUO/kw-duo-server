@@ -9,6 +9,6 @@ enum class Department(
     ;
 
     companion object {
-        fun of(displayName: String) = entries.first { it.displayName == displayName }
+        fun of(name: String) = entries.first { it.name == name }
     }
 }

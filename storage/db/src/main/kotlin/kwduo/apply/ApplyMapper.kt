@@ -1,9 +1,6 @@
 package kwduo.apply
 
-import org.springframework.stereotype.Component
-
-@Component
-class ApplyMapper {
+object ApplyMapper {
     fun toEntity(apply: Apply) =
         ApplyEntity(
             id = apply.id,

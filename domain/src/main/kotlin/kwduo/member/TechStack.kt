@@ -2,37 +2,38 @@ package kwduo.member
 
 enum class TechStack(
     val displayName: String,
+    val value: String,
 ) {
-    REACT("React"),
-    NEXTJS("Next.js"),
-    JAVASCRIPT("JavaScript"),
-    TYPESCRIPT("TypeScript"),
-    SPRING("Spring"),
-    NODEJS("Node.js"),
-    NESTJS("Nest.js"),
-    FLASK("Flask"),
-    DJANGO("Django"),
-    MYSQL("MySQL"),
-    MONGODB("MongoDB"),
-    REDIS("Redis"),
-    KOTLIN("Kotlin"),
-    JAVA("Java"),
-    SWIFT("Swift"),
-    FLUTTER("Flutter"),
-    REACT_NATIVE("React Native"),
-    PYTHON("Python"),
-    TENSORFLOW("TensorFlow"),
-    PYTORCH("PyTorch"),
-    UNITY("Unity"),
-    UNREAL("Unreal Engine"),
-    C("C"),
-    CPP("C++"),
-    CSHARP("C#"),
+    REACT("React", "REACT"),
+    NEXTJS("Next.js", "NEXTJS"),
+    JAVASCRIPT("JavaScript", "JAVASCRIPT"),
+    TYPESCRIPT("TypeScript", "TYPESCRIPT"),
+    SPRING("Spring", "SPRING"),
+    NODEJS("Node.js", "NODEJS"),
+    NESTJS("Nest.js", "NESTJS"),
+    FLASK("Flask", "FLASK"),
+    DJANGO("Django", "DJANGO"),
+    MYSQL("MySQL", "MYSQL"),
+    MONGODB("MongoDB", "MONGODB"),
+    REDIS("Redis", "REDIS"),
+    KOTLIN("Kotlin", "KOTLIN"),
+    JAVA("Java", "JAVA"),
+    SWIFT("Swift", "SWIFT"),
+    FLUTTER("Flutter", "FLUTTER"),
+    REACT_NATIVE("React Native", "REACT_NATIVE"),
+    PYTHON("Python", "PYTHON"),
+    TENSORFLOW("TensorFlow", "TENSORFLOW"),
+    PYTORCH("PyTorch", "PYTORCH"),
+    UNITY("Unity", "UNITY"),
+    UNREAL("Unreal Engine", "UNREAL"),
+    C("C", "C"),
+    CPP("C++", "CPP"),
+    CSHARP("C#", "CSHARP"),
     ;
 
     companion object {
-        fun of(displayName: String): TechStack {
-            return entries.first { it.displayName == displayName }
+        fun of(value: String): TechStack {
+            return entries.first { it.value == value }
         }
     }
 }

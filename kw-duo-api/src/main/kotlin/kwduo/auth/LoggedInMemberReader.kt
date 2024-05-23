@@ -3,7 +3,7 @@ package kwduo.auth
 import org.springframework.security.authentication.AnonymousAuthenticationToken
 import org.springframework.security.core.context.SecurityContextHolder
 
-object SecurityUtil {
+object LoggedInMemberReader {
     val currentMemberId: Long // SecurityContext 에 유저 정보가 저장되는 시점
         get() {
             check(isLoggedIn()) { "Security Context 에 인증 정보가 없습니다." }

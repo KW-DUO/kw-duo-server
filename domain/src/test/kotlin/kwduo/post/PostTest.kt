@@ -1,4 +1,4 @@
-package post
+package kwduo.post
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
@@ -17,6 +17,7 @@ class PostTest : BehaviorSpec({
                 projectType = ProjectType.SIDE_PROJECT,
                 interestingField = emptyList(),
                 wantedPosition = emptyList(),
+                techStack = emptyList(),
             )
 
         When("simplifiedTitle을 얻어왔을 때") {
@@ -39,6 +40,7 @@ class PostTest : BehaviorSpec({
                 projectType = ProjectType.SIDE_PROJECT,
                 interestingField = emptyList(),
                 wantedPosition = emptyList(),
+                techStack = emptyList(),
             )
 
         When("simplifiedTitle을 얻어왔을 때") {
