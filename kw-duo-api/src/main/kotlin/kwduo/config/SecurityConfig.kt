@@ -1,5 +1,10 @@
 package kwduo.config
 
+import kwduo.TokenValidator
+import kwduo.auth.AuthUtil
+import kwduo.config.jwt.JwtAccessDeniedHandler
+import kwduo.config.jwt.JwtAuthenticationEntryPoint
+import kwduo.config.jwt.JwtSecurityConfig
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -7,7 +12,12 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig(
+    private val jwtAuthenticationEntryPoint: JwtAuthenticationEntryPoint,
+    private val jwtAccessDeniedHandler: JwtAccessDeniedHandler,
+    private val authUtil: AuthUtil,
+    private val tokenValidator: TokenValidator,
+) {
     @Bean
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
@@ -22,9 +32,9 @@ class SecurityConfig {
                     "/api-docs",
                 ).permitAll()
             }
-            .exceptionHandling { exception ->
-//                exception.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//                exception.accessDeniedHandler(jwtAccessDeniedHandler)
+            .exceptionHandling {
+                it.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                it.accessDeniedHandler(jwtAccessDeniedHandler)
             }
             .headers { headers -> headers.frameOptions { it.sameOrigin() } }
             .sessionManagement { session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS) }
@@ -33,7 +43,7 @@ class SecurityConfig {
                 request.requestMatchers("/**").permitAll()
                 request.anyRequest().authenticated() // 나머지 API 는 전부 인증 필요
             } // JwtFilter 를 addFilterBefore 로 등록했던 JwtSecurityConfig 클래스를 적용
-//            .apply(JwtSecurityConfig(tokenProvider, authUseCase, tokenConstants))
+            .apply(JwtSecurityConfig(authUtil, tokenValidator))
 
         return http.build()
     }

@@ -1,6 +1,5 @@
 package kwduo.post
 
-import kwduo.member.Member
 import kwduo.member.Position
 import kwduo.member.TechStack
 import kwduo.member.exception.MemberNotAuthorizedException
@@ -43,11 +42,11 @@ abstract class Post(
     }
 
     fun updateDetail(
-        member: Member,
+        memberId: Long,
         title: String,
         content: String,
     ): Boolean {
-        if (!isAuthor(member)) {
+        if (!isAuthor(memberId)) {
             throw MemberNotAuthorizedException("작성자만 수정할 수 있습니다.")
         }
 
@@ -61,18 +60,31 @@ abstract class Post(
         return true
     }
 
-    fun close() {
+    fun close(memberId: Long) {
+        if (!isAuthor(memberId)) {
+            throw MemberNotAuthorizedException("작성자만 모집을 마감할 수 있습니다.")
+        }
+
         check(!isClosed) { "이미 종료된 게시글입니다." }
         isClosed = true
     }
 
-    fun unClose() {
+    fun unClose(memberId: Long) {
+        if (!isAuthor(memberId)) {
+            throw MemberNotAuthorizedException("작성자만 모집을 다시 시작할 수 있습니다.")
+        }
+        check(isClosed) { "이미 모집 중인 게시글입니다." }
+
         isClosed = false
     }
 
-    private fun isAuthor(member: Member) = member.id == authorId
+    private fun isAuthor(memberId: Long) = memberId == authorId
 
-    fun delete() {
+    fun delete(memberId: Long) {
+        if (!isAuthor(memberId)) {
+            throw MemberNotAuthorizedException("작성자만 삭제할 수 있습니다.")
+        }
+
         check(!isDeleted) { "이미 삭제된 게시글입니다." }
         isDeleted = true
     }

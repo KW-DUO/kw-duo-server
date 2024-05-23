@@ -1,9 +1,6 @@
 package kwduo.chatting
 
-import org.springframework.stereotype.Component
-
-@Component
-class ChatMapper {
+object ChatMapper {
     fun toEntity(chat: Chat) =
         ChatEntity(
             id = chat.id,

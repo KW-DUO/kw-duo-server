@@ -3,7 +3,9 @@ package kwduo.post
 interface PostRepository {
     fun save(post: Post): Post
 
-    fun findById(id: Long): Post?
+    fun saveFindTeammatePost(post: FindTeammatePost): FindTeammatePost
 
-    fun findAll(): List<Post>
+    fun saveFindTeamPost(post: FindTeamPost): FindTeamPost
+
+    fun findById(id: Long): Post?
 }

@@ -16,8 +16,8 @@ data class FindTeammatePostWriteRequest(
     val techStack: List<String>,
     val recruitNumber: Int,
 ) {
-    fun toPost(): FindTeammatePost {
-        return FindTeammatePost(
+    fun toPost() =
+        FindTeammatePost(
             title = title,
             content = content,
             authorId = authorId,
@@ -27,5 +27,4 @@ data class FindTeammatePostWriteRequest(
             techStack = techStack.map { TechStack.of(it) },
             recruitNumber = recruitNumber,
         )
-    }
 }

@@ -1,5 +1,8 @@
 package kwduo.member
 
+import org.springframework.stereotype.Component
+
+@Component
 class MemberReader(
     private val memberRepository: MemberRepository,
 ) {

@@ -1,4 +1,4 @@
-package member
+package kwduo.member
 
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.datatest.withData
