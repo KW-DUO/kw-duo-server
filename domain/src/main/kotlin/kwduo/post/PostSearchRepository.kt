@@ -12,7 +12,6 @@ interface PostSearchRepository {
         position: String?,
         wantedField: String?,
         bookmarkOnly: Boolean,
-        notClosedOnly: Boolean,
         page: Int,
         size: Int,
     ): Page<PostSummary>
@@ -25,7 +24,6 @@ interface PostSearchRepository {
         position: String?,
         wantedField: String?,
         bookmarkOnly: Boolean,
-        notClosedOnly: Boolean,
         page: Int,
         size: Int,
     ): Page<PostSummary>

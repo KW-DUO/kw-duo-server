@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController
 class PostController(
     private val postService: PostService,
     private val postSearchService: PostSearchService,
+    private val postApplicantService: PostApplicantService,
 ) {
     @Operation(summary = "팀원 찾기 글 조회")
     @GetMapping("/posts/find-teammate")
@@ -77,31 +78,18 @@ class PostController(
     fun getApplicant(
         @PathVariable postId: Long,
     ): PostApplicantResponseDTO {
+        val applicants = postApplicantService.getApplicants(postId)
+
         return PostApplicantResponseDTO(
-            applicants =
-                listOf(
-                    MemberSummarySchema(
-                        id = 1,
-                        nickname = "김개발",
-                        profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
-                        department = "SOFTWARE",
-                        techStack = listOf("KOTLIN", "JAVA", "SPRING"),
-                    ),
-                    MemberSummarySchema(
-                        id = 2,
-                        nickname = "박개발",
-                        profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
-                        department = "SOFTWARE",
-                        techStack = listOf("REACT", "NEXTJS", "SWIFT"),
-                    ),
-                    MemberSummarySchema(
-                        id = 3,
-                        nickname = "이개발",
-                        profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
-                        department = "INFORMATION_CONVERGENCE",
-                        techStack = emptyList(),
-                    ),
-                ),
+            applicants.map {
+                MemberSummarySchema(
+                    id = it.id,
+                    nickname = it.nickname,
+                    profileImgUrl = it.profileImgUrl,
+                    department = it.department.displayName,
+                    techStack = it.techStack.map { it.displayName },
+                )
+            },
         )
     }
 

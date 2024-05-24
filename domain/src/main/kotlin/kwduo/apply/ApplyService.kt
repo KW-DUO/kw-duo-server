@@ -22,4 +22,8 @@ class ApplyService(
     ): Boolean {
         return applyRepository.existsByMemberAndPostId(memberId, postId)
     }
+
+    fun getApplicants(postId: Long): List<Apply> {
+        return applyRepository.findByPostId(postId)
+    }
 }

@@ -15,7 +15,6 @@ class PostSearchService(
         position: String?,
         wantedField: String?,
         bookmarkOnly: Boolean,
-        notClosedOnly: Boolean,
         page: Int,
         size: Int,
     ): PostSummary {
@@ -28,7 +27,6 @@ class PostSearchService(
                 position = position,
                 wantedField = wantedField,
                 bookmarkOnly = bookmarkOnly,
-                notClosedOnly = notClosedOnly,
                 page = page,
                 size = size,
             )
