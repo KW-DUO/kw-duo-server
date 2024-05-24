@@ -12,7 +12,7 @@ data class PostSummarySchema(
     val projectType: String,
     val title: String,
     val department: String,
-    val `class`: String?,
+    val className: String?,
     val wantedPosition: List<String>,
     val wantedField: List<String>,
     val author: AuthorSchema,
@@ -37,7 +37,7 @@ data class PostSummarySchema(
         projectType = post.projectType.value,
         title = post.title,
         department = department,
-        `class` = className,
+        className = className,
         wantedPosition = post.wantedPosition.map { it.displayName },
         wantedField = post.interestingField.map { it.value },
         author =

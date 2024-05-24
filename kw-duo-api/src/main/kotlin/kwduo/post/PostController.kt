@@ -70,7 +70,17 @@ class PostController(
     fun getPostDetail(
         @PathVariable postId: Long,
     ): PostDetailSchema {
-        return DummyPosts.detail(postId)
+        if (postId == 999L) {
+            return DummyPosts.detail(postId)
+        }
+
+        val postDetail =
+            postService.getPostDetail(
+                LoggedInMemberReader.currentNullishMemberId,
+                postId,
+            )
+
+        return PostDetailSchema(postDetail)
     }
 
     @Operation(summary = "지원자 조회")
@@ -106,6 +116,8 @@ class PostController(
                     content = request.content,
                     authorId = LoggedInMemberReader.currentMemberId,
                     projectType = request.projectType,
+                    className = request.className,
+                    department = request.department,
                     interestingField = request.interestingField,
                     wantedPosition = request.wantedPosition,
                     techStack = request.techStack,
@@ -139,6 +151,8 @@ class PostController(
                     content = request.content,
                     authorId = LoggedInMemberReader.currentMemberId,
                     projectType = request.projectType,
+                    className = request.className,
+                    department = request.department,
                     interestingField = request.interestingField,
                     wantedPosition = request.wantedPosition,
                     techStack = request.techStack,

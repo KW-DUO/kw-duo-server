@@ -25,7 +25,7 @@ object DummyPosts {
                 wantedField = listOf("WEB", "AI"),
                 department = "SOFTWARE",
                 techStack = listOf("KOTLIN", "JAVA", "SPRING", "JPA"),
-                `class` = "기계학습",
+                className = "기계학습",
                 createdAt = LocalDateTime.now(),
             ),
             PostSummarySchema(
@@ -44,7 +44,7 @@ object DummyPosts {
                 wantedField = listOf("WEB"),
                 department = "SOFTWARE",
                 techStack = listOf("JAVA", "SPRING", "REACT"),
-                `class` = "기계학습",
+                className = "기계학습",
                 createdAt = LocalDateTime.now(),
             ),
             PostSummarySchema(
@@ -63,7 +63,7 @@ object DummyPosts {
                 wantedField = listOf("AI", "GAME"),
                 department = "INFORMATION_CONVERGENCE",
                 techStack = listOf("KOTLIN", "JAVA", "SPRING", "JPA"),
-                `class` = null,
+                className = null,
                 createdAt = LocalDateTime.now(),
             ),
         )
@@ -87,7 +87,7 @@ object DummyPosts {
             wantedPosition = listOf("FRONTEND", "BACKEND"),
             department = "SOFTWARE",
             techStack = listOf("KOTLIN", "JAVA", "SPRING"),
-            `class` = "기계학습",
+            className = "기계학습",
             recruitNumber = 3,
             interestingField = listOf("AI", "WEB"),
             createdAt = LocalDateTime.now(),

@@ -39,4 +39,11 @@ class BookmarkService(
             bookmarkRepository.save(bookmark)
         }
     }
+
+    fun isBookmarked(
+        memberId: Long,
+        postId: Long,
+    ): Boolean {
+        return bookmarkRepository.findByUserIdAndPostId(memberId, postId)?.isBookMarked ?: false
+    }
 }

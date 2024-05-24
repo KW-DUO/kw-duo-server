@@ -2,6 +2,7 @@ package kwduo.post
 
 import jakarta.persistence.DiscriminatorValue
 import jakarta.persistence.Entity
+import kwduo.member.Department
 import java.time.LocalDateTime
 
 @DiscriminatorValue("FIND_TEAM")
@@ -12,6 +13,8 @@ class FindTeamPostEntity(
     content: String,
     authorId: Long,
     projectType: ProjectType,
+    className: String?,
+    department: Department,
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
     writtenAt: LocalDateTime,
@@ -21,6 +24,8 @@ class FindTeamPostEntity(
         content,
         authorId,
         projectType,
+        className,
+        department,
         isDeleted,
         isClosed,
         writtenAt,

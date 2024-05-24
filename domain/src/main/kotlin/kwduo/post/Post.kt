@@ -1,5 +1,6 @@
 package kwduo.post
 
+import kwduo.member.Department
 import kwduo.member.Position
 import kwduo.member.TechStack
 import kwduo.member.exception.MemberNotAuthorizedException
@@ -11,6 +12,8 @@ abstract class Post(
     content: String,
     val authorId: Long,
     val projectType: ProjectType,
+    val className: String?,
+    val department: Department,
     val interestingField: List<Field>,
     val wantedPosition: List<Position>,
     var techStack: List<TechStack>,

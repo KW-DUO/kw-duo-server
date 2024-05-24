@@ -9,6 +9,7 @@ import jakarta.persistence.Inheritance
 import jakarta.persistence.InheritanceType
 import jakarta.persistence.Table
 import kwduo.BaseEntity
+import kwduo.member.Department
 import java.time.LocalDateTime
 
 @DiscriminatorColumn(name = "post_type")
@@ -26,6 +27,11 @@ abstract class PostEntity(
     @Enumerated(EnumType.STRING)
     @Column(name = "project_type")
     var projectType: ProjectType,
+    @Column(name = "class_name")
+    var className: String?,
+    @Enumerated(EnumType.STRING)
+    @Column(name = "department")
+    var department: Department,
     @Column(name = "is_deleted", nullable = false)
     var isDeleted: Boolean = false,
     @Column(name = "is_closed", nullable = false)

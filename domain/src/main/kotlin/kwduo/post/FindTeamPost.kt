@@ -1,5 +1,6 @@
 package kwduo.post
 
+import kwduo.member.Department
 import kwduo.member.Position
 import kwduo.member.TechStack
 import java.time.LocalDateTime
@@ -10,6 +11,8 @@ class FindTeamPost(
     content: String,
     authorId: Long,
     projectType: ProjectType,
+    className: String?,
+    department: Department,
     interestingField: List<Field>,
     wantedPosition: List<Position>,
     techStack: List<TechStack>,
@@ -22,6 +25,8 @@ class FindTeamPost(
         content = content,
         authorId = authorId,
         projectType = projectType,
+        className = className,
+        department = department,
         interestingField = interestingField,
         wantedPosition = wantedPosition,
         techStack = techStack,
