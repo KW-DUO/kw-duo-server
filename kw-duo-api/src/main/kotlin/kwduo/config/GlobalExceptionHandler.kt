@@ -4,6 +4,7 @@ import io.github.oshai.kotlinlogging.KotlinLogging
 import jakarta.servlet.ServletException
 import jakarta.validation.ConstraintViolationException
 import kwduo.member.exception.MemberNotAuthorizedException
+import kwduo.member.exception.MemberNotFoundException
 import kwduo.post.exception.PostNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -24,7 +25,7 @@ class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(
-        MemberNotAuthorizedException::class,
+        MemberNotFoundException::class,
         PostNotFoundException::class,
     )
     fun handleProfileNotFoundException(exception: Exception): ResponseEntity<ErrorResponse> {
