@@ -5,13 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.annotation.NeedLogin
 import kwduo.auth.LoggedInMemberReader
 import kwduo.member.schema.MemberSummarySchema
-import kwduo.post.dto.FindTeamPostWriteRequest
-import kwduo.post.dto.FindTeamPostWriteRequestDTO
-import kwduo.post.dto.FindTeammatePostWriteRequest
-import kwduo.post.dto.FindTeammatePostWriteRequestDTO
-import kwduo.post.dto.PostApplicantResponseDTO
-import kwduo.post.dto.PostSummaryResponseDTO
-import kwduo.post.dto.PostWriteResponseDTO
+import kwduo.post.dto.*
 import kwduo.post.schema.PostDetailSchema
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
@@ -135,7 +129,24 @@ class PostController(
         @PathVariable postId: Long,
         @RequestBody request: FindTeammatePostWriteRequestDTO,
     ) {
-        // 글 수정 로직
+        val requestMemberId = LoggedInMemberReader.currentMemberId
+
+        postService.updatePostDetail(
+            requestMemberId = requestMemberId,
+            postId = postId,
+            request =
+                FindTeammatePostEditRequest(
+                    title = request.title,
+                    content = request.content,
+                    projectType = request.projectType,
+                    className = request.className,
+                    department = request.department,
+                    interestingField = request.interestingField,
+                    wantedPosition = request.wantedPosition,
+                    techStack = request.techStack,
+                    recruitNumber = request.recruitNumber,
+                ),
+        )
     }
 
     @NeedLogin
@@ -171,12 +182,21 @@ class PostController(
     ) {
         val requestMemberId = LoggedInMemberReader.currentMemberId
 
-//        postService.updatePostDetail(
-//            requestMemberId = requestMemberId,
-//            postId = postId,
-//            title = request.title,
-//            content = request.content,
-//        )
+        postService.updatePostDetail(
+            requestMemberId = requestMemberId,
+            postId = postId,
+            request =
+                FindTeamPostEditRequest(
+                    title = request.title,
+                    content = request.content,
+                    projectType = request.projectType,
+                    className = request.className,
+                    department = request.department,
+                    interestingField = request.interestingField,
+                    wantedPosition = request.wantedPosition,
+                    techStack = request.techStack,
+                ),
+        )
     }
 
     @NeedLogin

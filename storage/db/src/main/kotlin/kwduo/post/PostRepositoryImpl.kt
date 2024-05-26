@@ -75,4 +75,30 @@ class PostRepositoryImpl(
 
         return PostMapper.toDomain(post, fields, techStack, wantedPositions)
     }
+
+    @Transactional(readOnly = true)
+    override fun findFindTeamPostById(id: Long): FindTeamPost? {
+        val post =
+            postJpaRepository.findFindTeamPostByIdOrNull(id)
+                ?: return null
+
+        val fields = interestingFieldJpaRepository.findByPostId(id)
+        val techStack = techStackJpaRepository.findByPostId(id)
+        val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
+
+        return PostMapper.toFindTeamPostDomain(post, fields, techStack, wantedPositions)
+    }
+
+    @Transactional(readOnly = true)
+    override fun findFindTeammatePostById(id: Long): FindTeammatePost? {
+        val post =
+            postJpaRepository.findFindTeammatePostByIdOrNull(id)
+                ?: return null
+
+        val fields = interestingFieldJpaRepository.findByPostId(id)
+        val techStack = techStackJpaRepository.findByPostId(id)
+        val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
+
+        return PostMapper.toFindTeammatePostDomain(post, fields, techStack, wantedPositions)
+    }
 }

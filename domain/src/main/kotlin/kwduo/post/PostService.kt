@@ -2,9 +2,7 @@ package kwduo.post
 
 import kwduo.bookmark.BookmarkService
 import kwduo.member.MemberService
-import kwduo.post.dto.FindTeamPostWriteRequest
-import kwduo.post.dto.FindTeammatePostWriteRequest
-import kwduo.post.dto.PostDetailInfo
+import kwduo.post.dto.*
 import kwduo.post.exception.PostNotFoundException
 import org.springframework.stereotype.Service
 
@@ -27,18 +25,33 @@ class PostService(
     fun updatePostDetail(
         requestMemberId: Long,
         postId: Long,
-        title: String,
-        content: String,
+        request: FindTeamPostEditRequest,
     ) {
-//        val post =
-//            postRepository.findById(postId)
-//                ?: throw PostNotFoundException()
-//
-//        val isUpdated = post.updateDetail(requestMemberId, title, content)
-//
-//        if (isUpdated) {
-//            postRepository.save(post)
-//        }
+        val post =
+            postRepository.findFindTeamPostById(postId)
+                ?: throw PostNotFoundException()
+
+        val isUpdated = post.update(requestMemberId, request)
+
+        if (isUpdated) {
+            postRepository.saveFindTeamPost(post)
+        }
+    }
+
+    fun updatePostDetail(
+        requestMemberId: Long,
+        postId: Long,
+        request: FindTeammatePostEditRequest,
+    ) {
+        val post =
+            postRepository.findFindTeammatePostById(postId)
+                ?: throw PostNotFoundException()
+
+        val isUpdated = post.update(requestMemberId, request)
+
+        if (isUpdated) {
+            postRepository.saveFindTeammatePost(post)
+        }
     }
 
     fun closePost(
