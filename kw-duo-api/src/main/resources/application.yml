@@ -7,6 +7,10 @@ spring:
       - logging.yml
       - db.yml
       - jwt.yml
+  servlet:
+    multipart:
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
 
 springdoc:
   swagger-ui:
