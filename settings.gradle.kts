@@ -7,6 +7,7 @@ include(
     "storage:api",
     "support:logging",
     "support:jwt",
+    "support:util",
 )
 
 pluginManagement {
