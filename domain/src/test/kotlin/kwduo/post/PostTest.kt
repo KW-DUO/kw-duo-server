@@ -5,6 +5,7 @@ import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldEndWith
 import io.kotest.matchers.string.shouldNotEndWith
 import io.kotest.matchers.string.shouldStartWith
+import kwduo.member.Department
 
 class PostTest : BehaviorSpec({
 
@@ -16,6 +17,8 @@ class PostTest : BehaviorSpec({
                 authorId = 1L,
                 projectType = ProjectType.SIDE_PROJECT,
                 interestingField = emptyList(),
+                className = "class",
+                department = Department.SOFTWARE,
                 wantedPosition = emptyList(),
                 techStack = emptyList(),
             )
@@ -39,6 +42,8 @@ class PostTest : BehaviorSpec({
                 authorId = 1L,
                 projectType = ProjectType.SIDE_PROJECT,
                 interestingField = emptyList(),
+                className = "class",
+                department = Department.SOFTWARE,
                 wantedPosition = emptyList(),
                 techStack = emptyList(),
             )

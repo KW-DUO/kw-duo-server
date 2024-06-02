@@ -1,13 +1,13 @@
-package kwduo.auth
+package kwduo.oauth
 
 import com.fasterxml.jackson.databind.JsonNode
 import kwduo.LinkedMultiValueMapMaker
 import org.springframework.http.HttpHeaders
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 import org.springframework.web.client.RestClient
 
-@Service
-class GoogleOAuthService {
+@Component
+class GoogleOAuthAuthorizer {
     private val restClient = RestClient.create()
     private val clientId = "1234"
     private val clientSecret = "1234"

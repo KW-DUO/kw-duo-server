@@ -1,4 +1,4 @@
-package baekjoon
+package kwduo.baekjoon
 
 import java.io.Serializable
 import java.time.LocalDateTime

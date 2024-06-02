@@ -12,6 +12,7 @@ dependencies {
     implementation(project(":support:jwt"))
     implementation(project(":support:util"))
     implementation(project(":storage:db"))
+    implementation(project(":storage:api"))
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0")
     implementation("io.jsonwebtoken:jjwt-api:0.11.2")
     implementation("io.github.oshai:kotlin-logging-jvm:5.1.1")

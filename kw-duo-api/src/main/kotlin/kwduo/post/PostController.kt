@@ -40,7 +40,23 @@ class PostController(
             return PostSummaryResponseDTO(posts = emptyList(), 32, 3, 3)
         }
 
-        return PostSummaryResponseDTO(DummyPosts.postSummary, 32, 3, 3)
+        val posts =
+            postSearchService.searchFindTeammatePost(
+                LoggedInMemberReader.currentNullishMemberId,
+                PostSearchRequest(
+                    q = q,
+                    projectType = projectType,
+                    department = department,
+                    className = className,
+                    position = position,
+                    wantedField = wantedField,
+                    bookmarkOnly = bookmarkOnly,
+                    page = page,
+                    size = size,
+                ),
+            )
+
+        return PostSummaryResponseDTO(posts)
     }
 
     @Operation(summary = "팀 찾기 글 조회")
@@ -56,7 +72,23 @@ class PostController(
         @RequestParam(required = false, defaultValue = "0") page: Int,
         @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
-        return PostSummaryResponseDTO(DummyPosts.postSummary, 51, 1, 32)
+        val posts =
+            postSearchService.searchFindTeamPost(
+                LoggedInMemberReader.currentNullishMemberId,
+                PostSearchRequest(
+                    q = q,
+                    projectType = projectType,
+                    department = department,
+                    className = className,
+                    position = position,
+                    wantedField = wantedField,
+                    bookmarkOnly = bookmarkOnly,
+                    page = page,
+                    size = size,
+                ),
+            )
+
+        return PostSummaryResponseDTO(posts)
     }
 
     @Operation(summary = "글 상세 조회")

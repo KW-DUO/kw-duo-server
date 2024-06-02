@@ -3,6 +3,7 @@ package baekjoon
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.FunSpec
 import io.kotest.matchers.shouldBe
+import kwduo.baekjoon.BaekjoonApiTierReader
 import kwduo.member.BaekjoonTier
 
 class BaekjoonApiTierReaderTest : FunSpec({

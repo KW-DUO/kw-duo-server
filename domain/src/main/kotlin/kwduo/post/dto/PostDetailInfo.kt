@@ -2,7 +2,10 @@ package kwduo.post.dto
 
 import kwduo.member.TechStack
 import kwduo.member.dto.MemberInfo
-import kwduo.post.*
+import kwduo.post.FindTeamPost
+import kwduo.post.FindTeammatePost
+import kwduo.post.Post
+import kwduo.post.ProjectType
 import java.time.LocalDateTime
 
 data class PostDetailInfo(

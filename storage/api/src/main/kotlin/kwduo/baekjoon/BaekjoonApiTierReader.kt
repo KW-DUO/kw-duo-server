@@ -1,4 +1,4 @@
-package baekjoon
+package kwduo.baekjoon
 
 import com.fasterxml.jackson.databind.JsonNode
 import kwduo.member.BaekjoonTier

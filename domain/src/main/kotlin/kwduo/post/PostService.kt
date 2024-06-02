@@ -2,7 +2,11 @@ package kwduo.post
 
 import kwduo.bookmark.BookmarkService
 import kwduo.member.MemberService
-import kwduo.post.dto.*
+import kwduo.post.dto.FindTeamPostEditRequest
+import kwduo.post.dto.FindTeamPostWriteRequest
+import kwduo.post.dto.FindTeammatePostEditRequest
+import kwduo.post.dto.FindTeammatePostWriteRequest
+import kwduo.post.dto.PostDetailInfo
 import kwduo.post.exception.PostNotFoundException
 import org.springframework.stereotype.Service
 
