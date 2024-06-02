@@ -37,7 +37,6 @@ class MemberController(
         memberService.updateInfo(
             LoggedInMemberReader.currentMemberId,
             MemberUpdateInfoRequest(
-                profileImgId = request.profileImgId,
                 nickname = request.nickname,
                 bio = request.bio,
                 techStack = request.techStack,

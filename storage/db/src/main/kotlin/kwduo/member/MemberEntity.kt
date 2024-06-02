@@ -14,8 +14,6 @@ class MemberEntity(
     id: Long? = null,
     @Column(name = "oauth_id", nullable = false)
     val oAuthId: String,
-    @Column(name = "profile_img_id", nullable = true)
-    var profileImgId: Long?,
     @Column(name = "nickname", nullable = false)
     var nickname: String,
     @Column(name = "bio", nullable = false)
@@ -26,6 +24,8 @@ class MemberEntity(
     @Enumerated(EnumType.STRING)
     @Column(name = "position", nullable = false)
     var position: Position,
+    @Column(name = "coding_test_language", nullable = false)
+    var codingTestLanguage: String,
     @Column(name = "email", nullable = false)
     var email: String,
     @Column(name = "is_authenticated", nullable = false)

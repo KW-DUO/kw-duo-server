@@ -2,7 +2,6 @@ package kwduo.member.dto
 
 data class MemberInfoUpdateRequestDTO(
     val nickname: String,
-    val profileImgId: Long,
     val department: String,
     val position: String,
     val bio: String,

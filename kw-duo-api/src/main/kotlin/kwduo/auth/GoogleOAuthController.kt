@@ -2,11 +2,14 @@ package kwduo.auth
 
 import com.fasterxml.jackson.databind.JsonNode
 import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
+import kwduo.auth.dto.GoogleLoginResponseDTO
 import kwduo.oauth.GoogleOAuthAuthorizer
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
+@Tag(name = "Auth")
 @RestController
 class GoogleOAuthController(
     private val googleOAuthAuthorizer: GoogleOAuthAuthorizer,
@@ -15,7 +18,7 @@ class GoogleOAuthController(
     @GetMapping("/auth/google")
     fun googleLogin(
         @RequestParam code: String,
-    ): String {
+    ): GoogleLoginResponseDTO {
         // 구글에 api 쏴서 코드 검증
         val accessToken = googleOAuthAuthorizer.getAccessToken(code)
 
@@ -23,7 +26,8 @@ class GoogleOAuthController(
         val userResource = googleOAuthAuthorizer.getUserResource(accessToken)
 
         // 유저 정보의 oAuthId만 리턴
-        return getOAuthId(userResource)
+        val oAuthId = getOAuthId(userResource)
+        return GoogleLoginResponseDTO(oAuthId)
     }
 
     private fun getOAuthId(userResource: JsonNode): String {

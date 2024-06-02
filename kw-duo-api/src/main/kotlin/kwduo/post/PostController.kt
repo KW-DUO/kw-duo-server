@@ -36,10 +36,6 @@ class PostController(
         @RequestParam(required = false, defaultValue = "0") page: Int,
         @RequestParam(required = false, defaultValue = "20") size: Int,
     ): PostSummaryResponseDTO {
-        if (q == "i dont want see") {
-            return PostSummaryResponseDTO(posts = emptyList(), 32, 3, 3)
-        }
-
         val posts =
             postSearchService.searchFindTeammatePost(
                 LoggedInMemberReader.currentNullishMemberId,
@@ -121,7 +117,6 @@ class PostController(
                 MemberSummarySchema(
                     id = it.id,
                     nickname = it.nickname,
-                    profileImgUrl = it.profileImgUrl,
                     department = it.department.displayName,
                     techStack = it.techStack.map { it.displayName },
                 )

@@ -2,8 +2,6 @@ package kwduo.member.dto
 
 data class MemberInfoResponseDTO(
     val id: Long,
-    val profileImgUrl: String?,
-    val profileImgId: Long?,
     val nickname: String,
     val department: String,
     val position: String,
@@ -14,8 +12,6 @@ data class MemberInfoResponseDTO(
 ) {
     constructor(memberInfo: MemberInfo) : this(
         id = memberInfo.id,
-        profileImgUrl = memberInfo.profileImgUrl,
-        profileImgId = memberInfo.profileImgId,
         nickname = memberInfo.nickname,
         department = memberInfo.department.name,
         position = memberInfo.position.name,

@@ -35,7 +35,6 @@ data class PostDetailSchema(
             AuthorSchema(
                 postDetail.author.id,
                 postDetail.author.nickname,
-                postDetail.author.profileImgUrl,
             ),
         bookmark = BookmarkSchema(postDetail.isBookmarked),
         techStack = postDetail.techStack.map { it.displayName },

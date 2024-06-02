@@ -10,11 +10,11 @@ object DummyChat {
         listOf(
             ChattingRoomSchema(
                 1,
-                ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                ChatMemberSchema(1, "김개발", null),
                 ChatSchema(
                     1,
                     "안녕하세요",
-                    ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                    ChatMemberSchema(1, "김개발", null),
                     LocalDateTime.now(),
                 ),
             ),
@@ -23,7 +23,6 @@ object DummyChat {
                 ChatMemberSchema(
                     2,
                     "Faker",
-                    "https://avatars.githubusercontent.com/u/12345678?v=4",
                     "RUBY1",
                 ),
                 ChatSchema(
@@ -32,7 +31,6 @@ object DummyChat {
                     ChatMemberSchema(
                         2,
                         "Faker",
-                        "https://avatars.githubusercontent.com/u/12345678?v=4",
                         "RUBY1",
                     ),
                     LocalDateTime.now().minusDays(2),
@@ -40,7 +38,7 @@ object DummyChat {
             ),
             ChattingRoomSchema(
                 3,
-                ChatMemberSchema(3, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                ChatMemberSchema(3, "김개발", null),
                 null,
             ),
         )
@@ -50,31 +48,31 @@ object DummyChat {
             ChatSchema(
                 1,
                 "안녕하세요",
-                ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                ChatMemberSchema(1, "김개발", null),
                 LocalDateTime.now().minusDays(3),
             ),
             ChatSchema(
                 2,
                 "안녕하세요",
-                ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
+                ChatMemberSchema(2, "Faker", "RUBY1"),
                 LocalDateTime.now().minusDays(3),
             ),
             ChatSchema(
                 3,
                 "족보 삽니다",
-                ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
+                ChatMemberSchema(2, "Faker", "RUBY1"),
                 LocalDateTime.now().minusDays(3),
             ),
             ChatSchema(
                 4,
                 "족발 보쌈이요?",
-                ChatMemberSchema(1, "김개발", "https://avatars.githubusercontent.com/u/12345678?v=4", null),
+                ChatMemberSchema(1, "김개발", null),
                 LocalDateTime.now().minusDays(2),
             ),
             ChatSchema(
                 5,
                 "? ;;;",
-                ChatMemberSchema(2, "Faker", "https://avatars.githubusercontent.com/u/12345678?v=4", "RUBY1"),
+                ChatMemberSchema(2, "Faker", "RUBY1"),
                 LocalDateTime.now(),
             ),
         )

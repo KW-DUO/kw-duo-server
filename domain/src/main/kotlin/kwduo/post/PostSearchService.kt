@@ -45,12 +45,7 @@ class PostSearchService(
 
             return@map PostSummary(
                 id = post.id,
-                postType =
-                    when (post) {
-                        is FindTeammatePost -> "find-teammate"
-                        is FindTeamPost -> "find-team"
-                        else -> throw IllegalArgumentException("Unknown post type")
-                    },
+                postType = getPostType(post),
                 projectType = post.projectType,
                 title = post.title,
                 department = post.department,
@@ -61,7 +56,6 @@ class PostSearchService(
                     PostSummary.Author(
                         id = author.id,
                         nickname = author.nickname,
-                        profileImageUrl = null,
                     ),
                 isBookmarked = isBookmarked,
                 techStack = post.techStack,
@@ -69,4 +63,11 @@ class PostSearchService(
             )
         }
     }
+
+    private fun getPostType(post: Post) =
+        when (post) {
+            is FindTeammatePost -> "FIND-TEAMMATE"
+            is FindTeamPost -> "FIND-TEAM"
+            else -> throw IllegalArgumentException("Unknown post type")
+        }
 }

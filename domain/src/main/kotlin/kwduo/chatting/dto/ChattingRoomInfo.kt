@@ -1,7 +1,6 @@
 package kwduo.chatting.dto
 
 import kwduo.chatting.Chat
-import kwduo.image.Image
 import kwduo.member.Member
 
 data class ChattingRoomInfo(
@@ -12,17 +11,14 @@ data class ChattingRoomInfo(
     constructor(
         id: Long,
         member: Member,
-        memberProfileImg: Image?,
         lastChat: Chat,
         lastChatMember: Member,
-        lastChatMemberProfileImg: Image?,
     ) : this(
         id = id,
         member =
             ChatMemberInfo(
                 id = member.id!!,
                 nickname = member.nickname,
-                profileImgUrl = memberProfileImg?.url,
                 baekjoonTier = member.baekjoonInfo?.tier,
             ),
         lastChat =
@@ -33,7 +29,6 @@ data class ChattingRoomInfo(
                     ChatMemberInfo(
                         id = lastChat.id,
                         nickname = lastChatMember.nickname,
-                        profileImgUrl = lastChatMemberProfileImg?.url,
                         baekjoonTier = lastChatMember.baekjoonInfo?.tier,
                     ),
                 createdAt = lastChat.createdAt,
@@ -43,13 +38,11 @@ data class ChattingRoomInfo(
     constructor(
         id: Long,
         member: Member,
-        memberProfileImg: Image?,
     ) : this(
         id,
         ChatMemberInfo(
             id = member.id!!,
             nickname = member.nickname,
-            profileImgUrl = memberProfileImg?.url,
             baekjoonTier = member.baekjoonInfo?.tier,
         ),
         null,

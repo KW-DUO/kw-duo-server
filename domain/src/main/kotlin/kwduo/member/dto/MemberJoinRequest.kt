@@ -13,6 +13,7 @@ data class MemberJoinRequest(
     val department: String,
     val techStack: List<String>,
     var position: String,
+    val codingTestLanguage: String,
     val email: String,
     var githubUrl: String?,
     var baekjoonId: String?,
@@ -26,12 +27,12 @@ data class MemberJoinRequest(
 
         return Member(
             oAuthId = oAuthId,
-            profileImgId = null,
             nickname = nickname,
             bio = "",
             department = Department.of(department),
             techStack = techStack.map { TechStack.of(it) },
             position = Position.of(position),
+            codingTestLanguage = codingTestLanguage,
             emailInfo = KwEmailInfo(email),
             githubUrl = githubUrl,
             baekjoonInfo = baekjoonInfo,

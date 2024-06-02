@@ -12,4 +12,12 @@ interface MemberJpaRepository : JpaRepository<MemberEntity, Long> {
     """,
     )
     fun findByNickname(nickname: String): MemberEntity?
+
+    @Query(
+        """
+        SELECT COUNT(m)
+        FROM MemberEntity m
+    """,
+    )
+    fun getAllCount(): Long
 }

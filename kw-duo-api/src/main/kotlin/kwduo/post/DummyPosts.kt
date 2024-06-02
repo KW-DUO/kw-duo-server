@@ -18,7 +18,6 @@ object DummyPosts {
                     AuthorSchema(
                         id = 1,
                         nickname = "김개발",
-                        profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
                     ),
                 bookmark = BookmarkSchema(false),
                 wantedPosition = listOf("FRONTEND", "BACKEND"),
@@ -37,7 +36,6 @@ object DummyPosts {
                     AuthorSchema(
                         id = 2,
                         nickname = "박개발",
-                        profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
                     ),
                 bookmark = BookmarkSchema(false),
                 wantedPosition = listOf("BACKEND"),
@@ -56,7 +54,6 @@ object DummyPosts {
                     AuthorSchema(
                         id = 3,
                         nickname = "스파이더맨",
-                        profileImgUrl = null,
                     ),
                 bookmark = BookmarkSchema(false),
                 wantedPosition = listOf("FRONTEND", "BACKEND"),
@@ -81,7 +78,6 @@ object DummyPosts {
                 AuthorSchema(
                     id = 1,
                     nickname = "김개발",
-                    profileImgUrl = "https://avatars.githubusercontent.com/u/12345678?v=4",
                 ),
             bookmark = BookmarkSchema(false),
             wantedPosition = listOf("FRONTEND", "BACKEND"),

@@ -27,7 +27,7 @@ data class PostSummarySchema(
         className = post.className,
         wantedPosition = post.wantedPosition.map { it.value },
         wantedField = post.wantedField.map { it.value },
-        author = AuthorSchema(post.author.id, post.author.nickname, post.author.profileImageUrl),
+        author = AuthorSchema(post.author.id, post.author.nickname),
         bookmark = BookmarkSchema(post.isBookmarked),
         techStack = post.techStack.map { it.value },
         createdAt = post.createdAt,

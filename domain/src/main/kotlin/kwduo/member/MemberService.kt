@@ -1,6 +1,5 @@
 package kwduo.member
 
-import kwduo.image.ImageReader
 import kwduo.member.dto.MemberInfo
 import kwduo.member.dto.MemberJoinRequest
 import kwduo.member.dto.MemberUpdateInfoRequest
@@ -12,17 +11,12 @@ import org.springframework.stereotype.Service
 @Service
 class MemberService(
     private val memberReader: MemberReader,
-    private val imageReader: ImageReader,
     private val memberRepository: MemberRepository,
     private val eventPublisher: ApplicationEventPublisher,
 ) {
     fun join(request: MemberJoinRequest): Member {
         val member = request.toMember()
 
-//        if (member.profileImgId != null) {
-//            imageService.use(member.profileImgId)
-//        }
-//
 //        updateBaekjoonTier(member)
 
         val savedMember = memberRepository.save(member)
@@ -52,8 +46,6 @@ class MemberService(
         return MemberInfo(
             id = member.id!!,
             nickname = member.nickname,
-            profileImgUrl = getProfileImgUrl(member.profileImgId),
-            profileImgId = member.profileImgId,
             department = member.department,
             baekjoonId = member.baekjoonId,
             position = member.position,
@@ -61,10 +53,5 @@ class MemberService(
             bio = member.bio,
             githubUrl = member.githubUrl,
         )
-    }
-
-    private fun getProfileImgUrl(profileImgId: Long?): String? {
-        if (profileImgId == null) return null
-        return imageReader.findById(profileImgId).url
     }
 }

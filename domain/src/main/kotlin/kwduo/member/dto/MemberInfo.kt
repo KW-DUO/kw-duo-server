@@ -6,8 +6,6 @@ import kwduo.member.TechStack
 
 data class MemberInfo(
     val id: Long,
-    val profileImgUrl: String?,
-    val profileImgId: Long?,
     val nickname: String,
     val department: Department,
     val position: Position,
