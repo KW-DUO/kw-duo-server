@@ -44,4 +44,15 @@ class MemberRepositoryImpl(
 
         return MemberMapper.toDomain(memberEntity, techStacks)
     }
+
+    @Transactional(readOnly = true)
+    override fun findByOAuthId(oAuthId: String): Member? {
+        val memberEntity =
+            memberJpaRepository.findByOAuthId(oAuthId)
+                ?: throw MemberNotFoundException()
+
+        val techStacks = techStackJpaRepository.findByMemberId(memberEntity.id!!)
+
+        return MemberMapper.toDomain(memberEntity, techStacks)
+    }
 }

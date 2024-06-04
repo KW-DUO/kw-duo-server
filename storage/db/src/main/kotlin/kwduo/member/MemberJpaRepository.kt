@@ -20,4 +20,13 @@ interface MemberJpaRepository : JpaRepository<MemberEntity, Long> {
     """,
     )
     fun getAllCount(): Long
+
+    @Query(
+        """
+        SELECT m
+        FROM MemberEntity m
+        WHERE m.oAuthId = :oAuthId
+    """,
+    )
+    fun findByOAuthId(oAuthId: String): MemberEntity?
 }

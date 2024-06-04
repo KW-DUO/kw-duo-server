@@ -54,4 +54,8 @@ class MemberService(
             githubUrl = member.githubUrl,
         )
     }
+
+    fun findByOAuthId(oAuthId: String): Member? {
+        return memberRepository.findByOAuthId(oAuthId)
+    }
 }

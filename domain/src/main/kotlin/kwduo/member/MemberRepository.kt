@@ -6,4 +6,6 @@ interface MemberRepository {
     fun findById(id: Long): Member?
 
     fun findByNickname(nickname: String): Member?
+
+    fun findByOAuthId(oAuthId: String): Member?
 }
