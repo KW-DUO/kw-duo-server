@@ -76,8 +76,6 @@ class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception::class)
     fun handleNotHandledException(exception: Exception): ResponseEntity<ErrorResponse> {
-//        Sentry.captureException(exception)
-
         val errorMessage: String = exception.stackTrace.joinToString(separator = "   ")
         log.error { "예상치 못한 예외가 발생했습니다." }
         log.error { exception.message }
