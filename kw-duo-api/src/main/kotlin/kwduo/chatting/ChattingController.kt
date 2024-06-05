@@ -21,10 +21,6 @@ class ChattingController(
     fun getChattingRoomList(
         @RequestParam(name = "q", required = false) nickname: String?,
     ): ChattingRoomResponseDTO {
-        if (nickname == "dummy") {
-            return ChattingRoomResponseDTO(DummyChat.chattingRooms)
-        }
-
         val chattingRooms = chattingService.getAllChattingRoom(LoggedInMemberReader.currentMemberId)
         return ChattingRoomResponseDTO.of(chattingRooms)
     }

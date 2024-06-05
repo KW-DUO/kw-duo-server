@@ -53,9 +53,9 @@ class PostSearchQueryDSLRepository(
 
         return Page.of(
             content,
-            request.page,
-            request.size,
             totalCount.toInt(),
+            request.size,
+            request.page,
         )
     }
 
@@ -100,9 +100,9 @@ class PostSearchQueryDSLRepository(
 
         return Page.of(
             content,
-            request.page,
-            request.size,
             totalCount.toInt(),
+            request.size,
+            request.page,
         )
     }
 
