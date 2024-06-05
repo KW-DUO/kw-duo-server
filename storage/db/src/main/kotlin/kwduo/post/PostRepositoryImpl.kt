@@ -1,10 +1,10 @@
 package kwduo.post
 
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class PostRepositoryImpl(
     private val postJpaRepository: PostJpaRepository,
     private val interestingFieldJpaRepository: PostInterestingFieldJpaRepository,

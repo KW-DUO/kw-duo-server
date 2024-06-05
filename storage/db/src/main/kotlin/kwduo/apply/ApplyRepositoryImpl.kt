@@ -1,9 +1,9 @@
 package kwduo.apply
 
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class ApplyRepositoryImpl(
     private val applyJpaRepository: ApplyJpaRepository,
 ) : ApplyRepository {

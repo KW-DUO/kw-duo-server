@@ -2,9 +2,9 @@ package kwduo.post
 
 import kwduo.post.dto.PostSearchRequest
 import kwduo.util.Page
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 
-@Repository
+@Component
 class PostSearchRepositoryImpl(
     private val postSearchQueryDSLRepository: PostSearchQueryDSLRepository,
 ) : PostSearchRepository {

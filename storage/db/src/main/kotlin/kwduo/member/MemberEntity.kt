@@ -36,7 +36,7 @@ class MemberEntity(
     var baekjoonId: String?,
     @Enumerated(EnumType.STRING)
     var tier: BaekjoonTier? = null,
-    @Column(name = "tier_updated_at", nullable = false)
+    @Column(name = "tier_updated_at", nullable = true)
     var tierUpdatedAt: LocalDateTime? = LocalDateTime.now(),
     @Column(name = "join_at", nullable = false)
     var joinAt: LocalDateTime,

@@ -2,10 +2,10 @@ package kwduo.member
 
 import kwduo.member.exception.MemberNotFoundException
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class MemberRepositoryImpl(
     private val memberJpaRepository: MemberJpaRepository,
     private val techStackJpaRepository: MemberTechStackJpaRepository,

@@ -38,6 +38,7 @@ class GlobalExceptionHandler {
     @ExceptionHandler(
         IllegalStateException::class,
         IllegalArgumentException::class,
+        NoSuchElementException::class,
     )
     fun handleIllegalArgumentException(exception: Exception): ResponseEntity<ErrorResponse> {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
@@ -83,6 +84,7 @@ class GlobalExceptionHandler {
         log.error { errorMessage }
 
         return ResponseEntity.internalServerError()
-            .body(ErrorResponse("알 수 없는 문제가 발생했습니다."))
+            .body(ErrorResponse(exception.message))
+//            .body(ErrorResponse("알 수 없는 문제가 발생했습니다."))
     }
 }

@@ -1,9 +1,9 @@
 package kwduo.chatting
 
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 
-@Repository
+@Component
 class ChattingRoomRepositoryImpl(
     private val chattingRoomJpaRepository: ChattingRoomJpaRepository,
 ) : ChattingRoomRepository {

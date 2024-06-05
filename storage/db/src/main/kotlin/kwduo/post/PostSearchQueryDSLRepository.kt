@@ -44,6 +44,16 @@ class PostSearchQueryDSLRepository(
             queryFactory.select(findTeammatePost.count())
                 .from(findTeammatePost)
                 .join(post).on(findTeammatePost.id.eq(post.id))
+                .leftJoin(positionEntity).on(findTeammatePost.id.eq(positionEntity.postId))
+                .leftJoin(fieldEntity).on(findTeammatePost.id.eq(fieldEntity.postId))
+                .leftJoin(bookmark).on(
+                    bookmark.postId.eq(findTeammatePost.id),
+                    when (requestMemberId) {
+                        null -> bookmark.postId.isNull
+                        else -> bookmark.memberId.eq(requestMemberId)
+                    },
+                    bookmark.isBookMarked.isTrue,
+                )
                 .where(
                     getPostSearchFilter(request),
                     findTeammatePost.isClosed.isFalse,
@@ -91,6 +101,16 @@ class PostSearchQueryDSLRepository(
             queryFactory.select(findTeamPost.count())
                 .from(findTeamPost)
                 .join(post).on(findTeamPost.id.eq(post.id))
+                .leftJoin(positionEntity).on(findTeamPost.id.eq(positionEntity.postId))
+                .leftJoin(fieldEntity).on(findTeamPost.id.eq(fieldEntity.postId))
+                .leftJoin(bookmark).on(
+                    bookmark.postId.eq(findTeamPost.id),
+                    when (requestMemberId) {
+                        null -> bookmark.postId.isNull
+                        else -> bookmark.memberId.eq(requestMemberId)
+                    },
+                    bookmark.isBookMarked.isTrue,
+                )
                 .where(
                     getPostSearchFilter(request),
                     findTeamPost.isClosed.isFalse,
@@ -134,7 +154,7 @@ class PostSearchQueryDSLRepository(
         }
 
         if (request.bookmarkOnly) {
-            expression = expression.and(bookmark.count().gt(0L))
+            expression = expression.and(bookmark.id.isNotNull)
         }
 
         return expression
