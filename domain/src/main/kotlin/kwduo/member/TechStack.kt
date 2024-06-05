@@ -5,6 +5,7 @@ enum class TechStack(
     val value: String,
 ) {
     REACT("React", "REACT"),
+    VUE("Vue", "VUE"),
     NEXTJS("Next.js", "NEXTJS"),
     JAVASCRIPT("JavaScript", "JAVASCRIPT"),
     TYPESCRIPT("TypeScript", "TYPESCRIPT"),

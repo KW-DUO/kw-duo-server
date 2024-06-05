@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.auth.LoggedInMemberReader
 import kwduo.chatting.dto.ChatResponseDTO
 import kwduo.chatting.dto.ChattingRoomResponseDTO
+import kwduo.chatting.schema.ChatSchema
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
@@ -35,6 +36,10 @@ class ChattingController(
         @RequestParam(required = false, defaultValue = "0") page: Int,
         @RequestParam(required = false, defaultValue = "20") size: Int,
     ): ChatResponseDTO {
-        return ChatResponseDTO(DummyChat.chats)
+        val chats = chattingService.getChatsByRoomId(LoggedInMemberReader.currentMemberId, roomId)
+
+        return ChatResponseDTO(
+            chats.map { ChatSchema(it) },
+        )
     }
 }

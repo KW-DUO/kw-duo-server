@@ -1,5 +1,7 @@
 package kwduo.chatting
 
+import kwduo.chatting.dto.ChatInfo
+import kwduo.chatting.dto.ChatMemberInfo
 import kwduo.chatting.dto.ChattingRoomInfo
 import kwduo.member.Member
 import kwduo.member.MemberReader
@@ -84,5 +86,32 @@ class ChattingService(
     ) {
         val chat = Chat.createFirstMetChat(post, chattingRoom, teamJoiner)
         chatRepository.save(chat)
+    }
+
+    fun getChatsByRoomId(
+        requestMemberId: Long,
+        roomId: Long,
+    ): List<ChatInfo> {
+        val chattingRoom =
+            chattingRoomRepository.findById(roomId)
+                ?: throw IllegalArgumentException("채팅방을 찾을 수 없습니다.")
+
+        check(chattingRoom.isMember(requestMemberId)) { "채팅방에 속한 멤버가 아닙니다." }
+
+        return chatRepository.findByChattingRoomId(roomId)
+            .map {
+                val member = memberReader.findById(it.sendMemberId)
+                ChatInfo(
+                    id = it.id!!,
+                    message = it.message,
+                    member =
+                        ChatMemberInfo(
+                            id = member.id!!,
+                            nickname = member.nickname,
+                            baekjoonTier = member.baekjoonInfo?.tier,
+                        ),
+                    createdAt = it.createdAt,
+                )
+            }
     }
 }
