@@ -48,8 +48,7 @@ class MemberRepositoryImpl(
     @Transactional(readOnly = true)
     override fun findByOAuthId(oAuthId: String): Member? {
         val memberEntity =
-            memberJpaRepository.findByOAuthId(oAuthId)
-                ?: throw MemberNotFoundException()
+            memberJpaRepository.findByOAuthId(oAuthId) ?: return null
 
         val techStacks = techStackJpaRepository.findByMemberId(memberEntity.id!!)
 

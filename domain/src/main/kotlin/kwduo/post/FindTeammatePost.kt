@@ -65,9 +65,9 @@ class FindTeammatePost(
         detail != PostDetail(request.title, request.content) ||
             projectType != ProjectType.of(request.projectType) ||
             className != request.className ||
-            department != Department.valueOf(request.department) ||
-            interestingField.map { it.name } != request.interestingField ||
-            wantedPosition.map { it.name } != request.wantedPosition ||
-            techStack.map { it.name } != request.techStack ||
+            department != Department.of(request.department) ||
+            interestingField.map { it.value } != request.interestingField ||
+            wantedPosition.map { it.value } != request.wantedPosition ||
+            techStack.map { it.value } != request.techStack ||
             recruitNumber != request.recruitNumber
 }

@@ -23,7 +23,7 @@ data class PostDetailSchema(
     constructor(postDetail: PostDetailInfo) : this(
         id = postDetail.id,
         postType = postDetail.postType,
-        projectType = postDetail.projectType.name,
+        projectType = postDetail.projectType.value,
         title = postDetail.title,
         content = postDetail.content,
         department = postDetail.department,
@@ -37,7 +37,7 @@ data class PostDetailSchema(
                 postDetail.author.nickname,
             ),
         bookmark = BookmarkSchema(postDetail.isBookmarked),
-        techStack = postDetail.techStack.map { it.displayName },
+        techStack = postDetail.techStack.map { it.value },
         createdAt = postDetail.createdAt,
     )
 }

@@ -118,7 +118,7 @@ class PostController(
                     id = it.id,
                     nickname = it.nickname,
                     department = it.department.displayName,
-                    techStack = it.techStack.map { it.displayName },
+                    techStack = it.techStack.map { it.value },
                 )
             },
         )
