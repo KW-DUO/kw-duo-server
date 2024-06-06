@@ -13,11 +13,11 @@ class MemberRepositoryImpl(
     @Transactional
     override fun save(member: Member): Member {
         val memberEntity = MemberMapper.toMemberEntity(member)
-        val techStackEntities = MemberMapper.toMemberStackEntity(member)
-
         val savedMemberEntity = memberJpaRepository.save(memberEntity)
 
+        val techStackEntities = MemberMapper.toMemberStackEntity(member, savedMemberEntity.id!!)
         techStackJpaRepository.deleteByMemberId(memberEntity.id!!)
+
         val savedTechStackEntities = techStackJpaRepository.saveAll(techStackEntities)
 
         return MemberMapper.toDomain(savedMemberEntity, savedTechStackEntities)

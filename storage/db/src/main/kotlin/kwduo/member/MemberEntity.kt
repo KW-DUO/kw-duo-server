@@ -26,10 +26,10 @@ class MemberEntity(
     var position: Position,
     @Column(name = "coding_test_language", nullable = false)
     var codingTestLanguage: String,
-    @Column(name = "email", nullable = false)
-    var email: String,
-    @Column(name = "is_authenticated", nullable = false)
-    var isAuthenticated: Boolean = false,
+//    @Column(name = "email", nullable = false)
+//    var email: String,
+//    @Column(name = "is_authenticated", nullable = false)
+//    var isAuthenticated: Boolean = false,
     @Column(name = "github_url", nullable = true)
     var githubUrl: String?,
     @Column(name = "baekjoon_id", nullable = true)

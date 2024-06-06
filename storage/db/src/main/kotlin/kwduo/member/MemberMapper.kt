@@ -13,9 +13,16 @@ object MemberMapper {
         techStack = techStacks.map { it.techStack },
         position = memberEntity.position,
         codingTestLanguage = memberEntity.codingTestLanguage,
-        emailInfo = KwEmailInfo(memberEntity.email, memberEntity.isAuthenticated),
+//        emailInfo = KwEmailInfo(memberEntity.email, memberEntity.isAuthenticated),
         githubUrl = memberEntity.githubUrl,
-        baekjoonInfo = memberEntity.baekjoonId?.let { BaekJoonInfo(it, memberEntity.tier, memberEntity.tierUpdatedAt!!) },
+        baekjoonInfo =
+            memberEntity.baekjoonId?.let {
+                BaekJoonInfo(
+                    it,
+                    memberEntity.tier,
+                    memberEntity.tierUpdatedAt!!,
+                )
+            },
         joinAt = memberEntity.joinAt,
     )
 
@@ -28,8 +35,8 @@ object MemberMapper {
             department = member.department,
             position = member.position,
             codingTestLanguage = member.codingTestLanguage,
-            email = member.email,
-            isAuthenticated = member.isEmailAuthenticated,
+//            email = member.email,
+//            isAuthenticated = member.isEmailAuthenticated,
             githubUrl = member.githubUrl,
             baekjoonId = member.baekjoonId,
             tier = member.baekjoonInfo?.tier,
@@ -44,4 +51,14 @@ object MemberMapper {
                 techStack = it,
             )
         }
+
+    fun toMemberStackEntity(
+        member: Member,
+        memberId: Long,
+    ) = member.techStack.map {
+        MemberTechStackEntity(
+            memberId = memberId,
+            techStack = it,
+        )
+    }
 }

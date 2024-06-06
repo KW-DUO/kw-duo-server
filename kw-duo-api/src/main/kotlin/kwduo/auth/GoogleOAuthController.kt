@@ -73,6 +73,7 @@ class GoogleOAuthController(
         return ResponseCookie.from("accessToken", accessToken)
             .httpOnly(true)
             .secure(true)
+            .path("https://kw-duo.vercel.app/")
             .maxAge(expiresIn / 1000)
             .build()
     }
@@ -84,6 +85,7 @@ class GoogleOAuthController(
         return ResponseCookie.from("refreshToken", refreshToken)
             .httpOnly(true)
             .secure(true)
+            .path("https://kw-duo.vercel.app/")
             .maxAge(expiresIn / 1000)
             .build()
     }

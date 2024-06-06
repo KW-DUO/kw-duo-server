@@ -12,25 +12,25 @@ class Member(
     var techStack: List<TechStack>,
     var position: Position,
     val codingTestLanguage: String,
-    private var emailInfo: KwEmailInfo,
+//    private var emailInfo: KwEmailInfo,
     var githubUrl: String?,
     var baekjoonInfo: BaekJoonInfo?,
     val joinAt: LocalDateTime = LocalDateTime.now(),
 ) {
-    val email
-        get() = emailInfo.email
+    //    val email
+//        get() = emailInfo.email
     val techStackNames: List<String>
         get() = techStack.map { it.displayName }
 
-    val isEmailAuthenticated: Boolean
-        get() = emailInfo.isAuthenticated()
+//    val isEmailAuthenticated: Boolean
+//        get() = emailInfo.isAuthenticated()
 
     val baekjoonId
         get() = baekjoonInfo?.baekjoonId
 
-    fun authenticateEmail() {
-        emailInfo.authenticate()
-    }
+//    fun authenticateEmail() {
+//        emailInfo.authenticate()
+//    }
 
     fun updateInfo(request: MemberUpdateInfoRequest) {
         this.nickname = request.nickname

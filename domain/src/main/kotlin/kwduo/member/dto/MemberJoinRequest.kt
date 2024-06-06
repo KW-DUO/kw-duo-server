@@ -2,7 +2,6 @@ package kwduo.member.dto
 
 import kwduo.member.BaekJoonInfo
 import kwduo.member.Department
-import kwduo.member.KwEmailInfo
 import kwduo.member.Member
 import kwduo.member.Position
 import kwduo.member.TechStack
@@ -33,7 +32,7 @@ data class MemberJoinRequest(
             techStack = techStack.map { TechStack.of(it) },
             position = Position.of(position),
             codingTestLanguage = codingTestLanguage,
-            emailInfo = KwEmailInfo(email),
+//            emailInfo = KwEmailInfo(email),
             githubUrl = githubUrl,
             baekjoonInfo = baekjoonInfo,
         )
