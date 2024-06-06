@@ -86,7 +86,8 @@ class MemberAuthController(
         return ResponseCookie.from("accessToken", accessToken)
             .httpOnly(true)
             .secure(true)
-            .path("kw-duo.vercel.app")
+            .path("/")
+            .domain("kw-duo.vercel.app")
             .maxAge(expiresIn / 1000)
             .build()
     }
@@ -98,7 +99,8 @@ class MemberAuthController(
         return ResponseCookie.from("refreshToken", refreshToken)
             .httpOnly(true)
             .secure(true)
-            .path("kw-duo.vercel.app")
+            .path("/")
+            .domain("kw-duo.vercel.app")
             .maxAge(expiresIn / 1000)
             .build()
     }

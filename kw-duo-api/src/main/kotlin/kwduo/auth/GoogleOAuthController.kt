@@ -8,9 +8,7 @@ import kwduo.TokenProvider
 import kwduo.auth.dto.GoogleLoginResponseDTO
 import kwduo.member.MemberService
 import kwduo.oauth.GoogleOAuthAuthorizer
-import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
@@ -26,29 +24,19 @@ class GoogleOAuthController(
     @GetMapping("/auth/google")
     fun googleLogin(
         @RequestParam(name = "code") accessToken: String,
-    ): ResponseEntity<GoogleLoginResponseDTO> {
+    ): GoogleLoginResponseDTO {
         val userResource = googleOAuthAuthorizer.getUserResource(accessToken)
         val oAuthId = getOAuthId(userResource)
 
         val member = memberService.findByOAuthId(oAuthId)
 
         if (member == null) {
-            return ResponseEntity.ok(GoogleLoginResponseDTO(oAuthId, true))
+            return GoogleLoginResponseDTO(oAuthId, true, null)
         }
 
         val token = createToken(member.id!!)
 
-        return ResponseEntity
-            .ok()
-            .header(
-                HttpHeaders.SET_COOKIE,
-                createAccessTokenCookie(token.accessToken, token.accessTokenExpiresIn).toString(),
-            )
-            .header(
-                HttpHeaders.SET_COOKIE,
-                createRefreshTokenCookie(token.refreshToken, token.refreshTokenExpiresIn).toString(),
-            )
-            .body(GoogleLoginResponseDTO(oAuthId, false))
+        return GoogleLoginResponseDTO(oAuthId, false, token.accessToken)
     }
 
     private fun getOAuthId(userResource: JsonNode): String {
@@ -73,7 +61,9 @@ class GoogleOAuthController(
         return ResponseCookie.from("accessToken", accessToken)
             .httpOnly(true)
             .secure(true)
-            .path("kw-duo.vercel.app")
+            .sameSite("None")
+            .path("/")
+            .domain("kw-duo.vercel.app")
             .maxAge(expiresIn / 1000)
             .build()
     }
@@ -85,7 +75,9 @@ class GoogleOAuthController(
         return ResponseCookie.from("refreshToken", refreshToken)
             .httpOnly(true)
             .secure(true)
-            .path("kw-duo.vercel.app")
+            .sameSite("None")
+            .path("/")
+            .domain("kw-duo.vercel.app")
             .maxAge(expiresIn / 1000)
             .build()
     }

@@ -7,7 +7,7 @@ import io.jsonwebtoken.security.Keys
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Component
 import java.security.Key
-import java.util.Date
+import java.util.*
 
 @Component
 class TokenProvider(
@@ -59,7 +59,7 @@ class TokenProvider(
         .compact()
 
     companion object {
-        private const val ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 7L
+        private const val ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 365L
         private const val REFRESH_TOKEN_EXPIRE_TIME = 1000 * 60 * 60 * 24 * 30L
     }
 }
