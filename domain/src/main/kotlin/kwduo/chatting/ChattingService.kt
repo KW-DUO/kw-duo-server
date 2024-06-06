@@ -60,10 +60,13 @@ class ChattingService(
     }
 
     fun sendChat(
-        chattingRoom: ChattingRoom,
+        chattingRoomId: Long,
         sendMemberId: Long,
         message: String,
-    ) {
+    ): Chat {
+        val chattingRoom =
+            chattingRoomRepository.findById(chattingRoomId)
+                ?: throw IllegalArgumentException("채팅방을 찾을 수 없습니다.")
         check(chattingRoom.isMember(sendMemberId)) { "채팅방에 속한 멤버가 아닙니다." }
 
         val chat =
@@ -77,6 +80,8 @@ class ChattingService(
 
         chattingRoom.updateLastReadMessageTime(sendMemberId)
         chattingRoomRepository.save(chattingRoom)
+
+        return chat
     }
 
     fun sendFirstMetChat(

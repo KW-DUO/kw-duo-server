@@ -2,10 +2,15 @@ package kwduo.chatting
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import kwduo.annotation.NeedLogin
 import kwduo.auth.LoggedInMemberReader
 import kwduo.chatting.dto.ChatResponseDTO
 import kwduo.chatting.dto.ChattingRoomResponseDTO
+import kwduo.chatting.schema.ChatMemberSchema
 import kwduo.chatting.schema.ChatSchema
+import kwduo.member.MemberReader
+import org.springframework.messaging.handler.annotation.MessageMapping
+import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestParam
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 class ChattingController(
     private val chattingService: ChattingService,
+    private val memberReader: MemberReader,
 ) {
     @Operation(summary = "채팅방 목록 조회")
     @GetMapping("/chats")
@@ -36,6 +42,36 @@ class ChattingController(
 
         return ChatResponseDTO(
             chats.map { ChatSchema(it) },
+        )
+    }
+
+    @NeedLogin
+    @Operation(summary = "채팅방의 채팅 전송")
+    @MessageMapping("/chat/{roomId}")
+    @SendTo("/chat/room/{roomId}")
+    fun sendChat(
+        @PathVariable roomId: Long,
+        @RequestParam message: String,
+    ): ChatSchema {
+        val chat =
+            chattingService.sendChat(
+                roomId,
+                LoggedInMemberReader.currentMemberId,
+                message,
+            )
+
+        val member = memberReader.findById(chat.sendMemberId)
+
+        return ChatSchema(
+            id = chat.id!!,
+            message = chat.message,
+            member =
+                ChatMemberSchema(
+                    id = member.id!!,
+                    nickname = member.nickname,
+                    baekjoonTier = member.baekjoonInfo?.tier?.value,
+                ),
+            createdAt = chat.createdAt,
         )
     }
 }
