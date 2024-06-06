@@ -8,14 +8,14 @@ class EmailService(
     private val emailTokenService: EmailTokenService,
 ) {
     fun sendAuthorizeEmail(member: Member) {
-        check(!member.isEmailAuthenticated) { "이미 이메일 인증된 유저입니다" }
+//        check(!member.isEmailAuthenticated) { "이미 이메일 인증된 유저입니다" }
 
-        val token = emailTokenService.createEmailToken(member.id!!)
-
-        emailSender.sendEmail(
-            email = member.email,
-            title = "[DUO] 가입 인증 메일",
-            content = "이메일 토큰: ${token.token}",
-        )
+//        val token = emailTokenService.createEmailToken(member.id!!)
+//
+//        emailSender.sendEmail(
+//            email = member.email,
+//            title = "[DUO] 가입 인증 메일",
+//            content = "이메일 토큰: ${token.token}",
+//        )
     }
 }

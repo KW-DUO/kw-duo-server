@@ -35,7 +35,7 @@ class PostSearchQueryDSLRepository(
                     findTeammatePost.isClosed.isFalse,
                     findTeammatePost.isDeleted.isFalse,
                 )
-                .orderBy(findTeammatePost.createdAt.desc())
+                .orderBy(post.id.desc())
                 .limit(request.size.toLong())
                 .offset(request.page * request.size.toLong())
                 .fetch()
@@ -74,7 +74,7 @@ class PostSearchQueryDSLRepository(
         request: PostSearchRequest,
     ): Page<Long> {
         val content =
-            queryFactory.selectDistinct(findTeamPost.id)
+            queryFactory.selectDistinct(post.id)
                 .from(findTeamPost)
                 .join(post).on(findTeamPost.id.eq(post.id))
                 .leftJoin(positionEntity).on(findTeamPost.id.eq(positionEntity.postId))
@@ -92,13 +92,13 @@ class PostSearchQueryDSLRepository(
                     findTeamPost.isClosed.isFalse,
                     findTeamPost.isDeleted.isFalse,
                 )
-                .orderBy(findTeamPost.createdAt.desc())
+                .orderBy(post.id.desc())
                 .limit(request.size.toLong())
                 .offset(request.page * request.size.toLong())
                 .fetch()
 
         val totalCount =
-            queryFactory.select(findTeamPost.countDistinct())
+            queryFactory.select(post.countDistinct())
                 .from(findTeamPost)
                 .join(post).on(findTeamPost.id.eq(post.id))
                 .leftJoin(positionEntity).on(findTeamPost.id.eq(positionEntity.postId))
