@@ -2,7 +2,7 @@ package kwduo.post.dto
 
 data class FindTeammatePostWriteRequestDTO(
     val projectType: String,
-    val department: String,
+    val department: String?,
     val className: String?,
     val interestingField: List<String>,
     val wantedPosition: List<String>,
