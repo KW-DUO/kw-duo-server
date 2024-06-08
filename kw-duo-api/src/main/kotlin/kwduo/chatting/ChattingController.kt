@@ -4,11 +4,13 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.annotation.NeedLogin
 import kwduo.auth.LoggedInMemberReader
+import kwduo.chatting.dto.ChatRequestDTO
 import kwduo.chatting.dto.ChatResponseDTO
 import kwduo.chatting.dto.ChattingRoomResponseDTO
 import kwduo.chatting.schema.ChatMemberSchema
 import kwduo.chatting.schema.ChatSchema
 import kwduo.member.MemberReader
+import org.springframework.messaging.handler.annotation.DestinationVariable
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.web.bind.annotation.GetMapping
@@ -47,19 +49,18 @@ class ChattingController(
         )
     }
 
-    @NeedLogin
     @Operation(summary = "채팅방의 채팅 전송")
-    @MessageMapping("/chat/{roomId}")
-    @SendTo("/chat/room/{roomId}")
+    @MessageMapping("/{roomId}")
+    @SendTo("/chat/{roomId}")
     fun sendChat(
-        @PathVariable roomId: Long,
-        @RequestParam message: String,
+        @DestinationVariable roomId: Long,
+        request: ChatRequestDTO,
     ): ChatSchema {
         val chat =
             chattingService.sendChat(
                 roomId,
-                LoggedInMemberReader.currentMemberId,
-                message,
+                request.requestMemberId,
+                request.message,
             )
 
         val member = memberReader.findById(chat.sendMemberId)

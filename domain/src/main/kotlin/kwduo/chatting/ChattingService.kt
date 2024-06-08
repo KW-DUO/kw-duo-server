@@ -76,12 +76,12 @@ class ChattingService(
                 sendMemberId = sendMemberId,
             )
 
-        chatRepository.save(chat)
+        val savedChat = chatRepository.save(chat)
 
         chattingRoom.updateLastReadMessageTime(sendMemberId)
         chattingRoomRepository.save(chattingRoom)
 
-        return chat
+        return savedChat
     }
 
     fun sendFirstMetChat(

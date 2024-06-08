@@ -51,7 +51,7 @@ class FindTeamPost(
         detail = PostDetail(request.title, request.content)
         projectType = ProjectType.of(request.projectType)
         className = request.className
-        department = Department.valueOf(request.department)
+        department = request.department?.let { Department.valueOf(it) }
         interestingField = request.interestingField.map { Field.valueOf(it) }
         wantedPosition = request.wantedPosition.map { Position.of(it) }
         techStack = request.techStack.map { TechStack.of(it) }
@@ -63,7 +63,7 @@ class FindTeamPost(
         detail != PostDetail(request.title, request.content) ||
             projectType != ProjectType.of(request.projectType) ||
             className != request.className ||
-            department != Department.valueOf(request.department) ||
+            department != request.department?.let { Department.valueOf(it) } ||
             interestingField != request.interestingField.map { Field.valueOf(it) } ||
             wantedPosition != request.wantedPosition.map { Position.of(it) } ||
             techStack != request.techStack.map { TechStack.of(it) }
