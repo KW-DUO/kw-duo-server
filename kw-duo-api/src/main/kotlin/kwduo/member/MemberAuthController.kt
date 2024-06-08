@@ -4,10 +4,13 @@ import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import kwduo.TokenDTO
 import kwduo.TokenProvider
+import kwduo.auth.LoggedInMemberReader
+import kwduo.member.dto.AuthInfoResponseDTO
 import kwduo.member.dto.MemberJoinRequestDTO
 import org.springframework.http.HttpHeaders
 import org.springframework.http.ResponseCookie
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
@@ -19,6 +22,17 @@ class MemberAuthController(
     private val memberService: MemberService,
     private val tokenProvider: TokenProvider,
 ) {
+    @Operation(summary = "로그인 유저 확인")
+    @GetMapping("/auth/info")
+    fun loginCheck(): AuthInfoResponseDTO {
+        val memberId = LoggedInMemberReader.currentNullishMemberId
+
+        return AuthInfoResponseDTO(
+            isLoggedIn = memberId != null,
+            memberId = memberId,
+        )
+    }
+
     @Operation(summary = "회원 가입")
     @PostMapping("/members/join")
     fun join(

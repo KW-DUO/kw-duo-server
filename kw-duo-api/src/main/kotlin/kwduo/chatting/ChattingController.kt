@@ -22,6 +22,7 @@ class ChattingController(
     private val chattingService: ChattingService,
     private val memberReader: MemberReader,
 ) {
+    @NeedLogin
     @Operation(summary = "채팅방 목록 조회")
     @GetMapping("/chats")
     fun getChattingRoomList(
@@ -31,6 +32,7 @@ class ChattingController(
         return ChattingRoomResponseDTO.of(chattingRooms)
     }
 
+    @NeedLogin
     @Operation(summary = "채팅방의 채팅 조회")
     @GetMapping("/chats/{roomId}")
     fun getChats(
