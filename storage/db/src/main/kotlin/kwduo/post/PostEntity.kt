@@ -30,8 +30,8 @@ abstract class PostEntity(
     @Column(name = "class_name")
     var className: String?,
     @Enumerated(EnumType.STRING)
-    @Column(name = "department")
-    var department: Department,
+    @Column(name = "department", nullable = true)
+    var department: Department?,
     @Column(name = "is_deleted", nullable = false)
     var isDeleted: Boolean = false,
     @Column(name = "is_closed", nullable = false)

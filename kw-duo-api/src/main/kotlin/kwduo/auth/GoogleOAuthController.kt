@@ -28,11 +28,9 @@ class GoogleOAuthController(
         val userResource = googleOAuthAuthorizer.getUserResource(accessToken)
         val oAuthId = getOAuthId(userResource)
 
-        val member = memberService.findByOAuthId(oAuthId)
-
-        if (member == null) {
-            return GoogleLoginResponseDTO(oAuthId, true, null)
-        }
+        val member =
+            memberService.findByOAuthId(oAuthId)
+                ?: return GoogleLoginResponseDTO(oAuthId, true, null)
 
         val token = createToken(member.id!!)
 

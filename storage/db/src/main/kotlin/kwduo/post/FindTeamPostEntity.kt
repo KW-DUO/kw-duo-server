@@ -14,7 +14,7 @@ class FindTeamPostEntity(
     authorId: Long,
     projectType: ProjectType,
     className: String?,
-    department: Department,
+    department: Department?,
     isDeleted: Boolean = false,
     isClosed: Boolean = false,
     writtenAt: LocalDateTime,

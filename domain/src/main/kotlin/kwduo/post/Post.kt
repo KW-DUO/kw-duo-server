@@ -13,7 +13,7 @@ abstract class Post(
     val authorId: Long,
     var projectType: ProjectType,
     var className: String?,
-    var department: Department,
+    var department: Department?,
     var interestingField: List<Field>,
     var wantedPosition: List<Position>,
     var techStack: List<TechStack>,

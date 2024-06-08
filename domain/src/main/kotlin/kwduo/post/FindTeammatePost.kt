@@ -14,7 +14,7 @@ class FindTeammatePost(
     authorId: Long,
     projectType: ProjectType,
     className: String?,
-    department: Department,
+    department: Department?,
     interestingField: List<Field>,
     wantedPosition: List<Position>,
     techStack: List<TechStack>,

@@ -15,7 +15,7 @@ class FindTeammatePostEntity(
     authorId: Long,
     projectType: ProjectType,
     className: String?,
-    department: Department,
+    department: Department?,
     @Column(name = "recruit_number", nullable = false)
     var recruitNumber: Int,
     isDeleted: Boolean = false,
