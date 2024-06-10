@@ -10,8 +10,8 @@ interface ChattingRoomJpaRepository : JpaRepository<ChattingRoomEntity, Long> {
         """
         SELECT cr
         FROM ChattingRoomEntity cr
-        WHERE cr.member1Id = :member1Id
-          AND cr.member2Id = :member2Id
+        WHERE (cr.member1Id = :member1Id AND cr.member2Id = :member2Id)
+           OR (cr.member1Id = :member2Id AND cr.member2Id = :member1Id)
     """,
     )
     fun findByParticipantMembersId(
