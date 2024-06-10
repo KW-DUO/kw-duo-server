@@ -117,8 +117,8 @@ class PostController(
                 MemberSummarySchema(
                     id = it.id,
                     nickname = it.nickname,
-                    department = it.department.displayName,
-                    techStack = it.techStack.map { it.value },
+                    department = it.department.name,
+                    techStack = it.techStack.map { t -> t.value },
                 )
             },
         )

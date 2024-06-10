@@ -4,13 +4,34 @@ import kwduo.apply.ApplyService
 import kwduo.chatting.ChattingService
 import kwduo.member.Member
 import kwduo.member.MemberReader
+import kwduo.post.exception.PostNotFoundException
+import org.springframework.stereotype.Service
 
+@Service
 class PostApplyService(
     private val applyService: ApplyService,
     private val chattingService: ChattingService,
     private val memberReader: MemberReader,
+    private val postRepository: PostRepository,
 ) {
-    fun applyTeam(
+    fun applyToPost(
+        requestMemberId: Long,
+        postId: Long,
+    ): Long {
+        val post =
+            postRepository.findById(postId)
+                ?: throw PostNotFoundException()
+
+        val member = memberReader.findById(requestMemberId)
+
+        return when (post) {
+            is FindTeammatePost -> applyTeam(post, member)
+            is FindTeamPost -> inviteTeammate(post, member)
+            else -> throw IllegalArgumentException("지원할 수 없는 게시물입니다.")
+        }
+    }
+
+    private fun applyTeam(
         post: FindTeammatePost,
         requestMember: Member,
     ): Long {
@@ -27,7 +48,7 @@ class PostApplyService(
         return chattingRoom.id!!
     }
 
-    fun inviteTeammate(
+    private fun inviteTeammate(
         post: FindTeamPost,
         requestMember: Member,
     ): Long {
