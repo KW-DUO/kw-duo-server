@@ -21,7 +21,7 @@ class PostSearchService(
         val postIds =
             postSearchRepository.searchFindTeammatePost(requestMemberId, request)
 
-        return findPostSummary(postIds)
+        return findPostSummary(requestMemberId, postIds)
     }
 
     fun searchFindTeamPost(
@@ -31,20 +31,23 @@ class PostSearchService(
         val postIds =
             postSearchRepository.searchFindTeamPost(requestMemberId, request)
 
-        return findPostSummary(postIds)
+        return findPostSummary(requestMemberId, postIds)
     }
 
-    private fun findPostSummary(postIds: Page<Long>): Page<PostSummary> {
+    private fun findPostSummary(
+        requestMemberId: Long?,
+        postIds: Page<Long>,
+    ): Page<PostSummary> {
         return postIds.map {
             val post =
                 postRepository.findById(it)
                     ?: throw IllegalArgumentException("Post not found: $it")
 
             val author = memberReader.findById(post.authorId)
-            val isBookmarked = bookmarkService.isBookmarked(author.id!!, post.id!!)
+            val isBookmarked = requestMemberId != null && bookmarkService.isBookmarked(requestMemberId, post.id!!)
 
             return@map PostSummary(
-                id = post.id,
+                id = post.id!!,
                 postType = getPostType(post),
                 projectType = post.projectType,
                 title = post.title,
@@ -54,7 +57,7 @@ class PostSearchService(
                 wantedField = post.interestingField,
                 author =
                     PostSummary.Author(
-                        id = author.id,
+                        id = author.id!!,
                         nickname = author.nickname,
                     ),
                 isBookmarked = isBookmarked,
