@@ -1,9 +1,9 @@
 package kwduo.bookmark
 
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class BookmarkRepositoryImpl(
     private val bookmarkJpaRepository: BookmarkJpaRepository,
 ) : BookmarkRepository {

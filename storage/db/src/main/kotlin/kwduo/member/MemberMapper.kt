@@ -7,15 +7,22 @@ object MemberMapper {
     ) = Member(
         id = memberEntity.id,
         oAuthId = memberEntity.oAuthId,
-        profileImgId = memberEntity.profileImgId,
         nickname = memberEntity.nickname,
         bio = memberEntity.bio,
         department = memberEntity.department,
         techStack = techStacks.map { it.techStack },
         position = memberEntity.position,
-        emailInfo = KwEmailInfo(memberEntity.email, memberEntity.isAuthenticated),
+        codingTestLanguage = memberEntity.codingTestLanguage,
+//        emailInfo = KwEmailInfo(memberEntity.email, memberEntity.isAuthenticated),
         githubUrl = memberEntity.githubUrl,
-        baekjoonInfo = memberEntity.baekjoonId?.let { BaekJoonInfo(it, memberEntity.tier, memberEntity.tierUpdatedAt!!) },
+        baekjoonInfo =
+            memberEntity.baekjoonId?.let {
+                BaekJoonInfo(
+                    it,
+                    memberEntity.tier,
+                    memberEntity.tierUpdatedAt!!,
+                )
+            },
         joinAt = memberEntity.joinAt,
     )
 
@@ -23,13 +30,13 @@ object MemberMapper {
         MemberEntity(
             id = member.id,
             oAuthId = member.oAuthId,
-            profileImgId = member.profileImgId,
             nickname = member.nickname,
             bio = member.bio,
             department = member.department,
             position = member.position,
-            email = member.email,
-            isAuthenticated = member.isEmailAuthenticated,
+            codingTestLanguage = member.codingTestLanguage,
+//            email = member.email,
+//            isAuthenticated = member.isEmailAuthenticated,
             githubUrl = member.githubUrl,
             baekjoonId = member.baekjoonId,
             tier = member.baekjoonInfo?.tier,
@@ -44,4 +51,14 @@ object MemberMapper {
                 techStack = it,
             )
         }
+
+    fun toMemberStackEntity(
+        member: Member,
+        memberId: Long,
+    ) = member.techStack.map {
+        MemberTechStackEntity(
+            memberId = memberId,
+            techStack = it,
+        )
+    }
 }

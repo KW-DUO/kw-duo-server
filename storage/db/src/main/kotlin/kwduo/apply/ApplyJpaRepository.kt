@@ -18,4 +18,13 @@ interface ApplyJpaRepository : JpaRepository<ApplyEntity, Long> {
         memberId: Long,
         postId: Long,
     ): Boolean
+
+    @Query(
+        """
+        SELECT a
+        FROM ApplyEntity a
+        WHERE a.postId = :postId
+    """,
+    )
+    fun findByPostId(postId: Long): List<ApplyEntity>
 }

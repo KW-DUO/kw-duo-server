@@ -1,13 +1,20 @@
 package kwduo.post
 
+import kwduo.bookmark.BookmarkService
+import kwduo.member.MemberService
+import kwduo.post.dto.FindTeamPostEditRequest
 import kwduo.post.dto.FindTeamPostWriteRequest
+import kwduo.post.dto.FindTeammatePostEditRequest
 import kwduo.post.dto.FindTeammatePostWriteRequest
+import kwduo.post.dto.PostDetailInfo
 import kwduo.post.exception.PostNotFoundException
 import org.springframework.stereotype.Service
 
 @Service
 class PostService(
+    private val memberService: MemberService,
     private val postRepository: PostRepository,
+    private val bookmarkService: BookmarkService,
 ) {
     fun writeFindTeammatePost(request: FindTeammatePostWriteRequest): FindTeammatePost {
         val post = request.toPost()
@@ -22,18 +29,33 @@ class PostService(
     fun updatePostDetail(
         requestMemberId: Long,
         postId: Long,
-        title: String,
-        content: String,
+        request: FindTeamPostEditRequest,
     ) {
-//        val post =
-//            postRepository.findById(postId)
-//                ?: throw PostNotFoundException()
-//
-//        val isUpdated = post.updateDetail(requestMemberId, title, content)
-//
-//        if (isUpdated) {
-//            postRepository.save(post)
-//        }
+        val post =
+            postRepository.findFindTeamPostById(postId)
+                ?: throw PostNotFoundException()
+
+        val isUpdated = post.update(requestMemberId, request)
+
+        if (isUpdated) {
+            postRepository.saveFindTeamPost(post)
+        }
+    }
+
+    fun updatePostDetail(
+        requestMemberId: Long,
+        postId: Long,
+        request: FindTeammatePostEditRequest,
+    ) {
+        val post =
+            postRepository.findFindTeammatePostById(postId)
+                ?: throw PostNotFoundException()
+
+        val isUpdated = post.update(requestMemberId, request)
+
+        if (isUpdated) {
+            postRepository.saveFindTeammatePost(post)
+        }
     }
 
     fun closePost(
@@ -70,5 +92,25 @@ class PostService(
 
         post.delete(requestMemberId)
         postRepository.save(post)
+    }
+
+    fun getPostDetail(
+        requestMemberId: Long?,
+        postId: Long,
+    ): PostDetailInfo {
+        val post =
+            postRepository.findById(postId)
+                ?: throw PostNotFoundException()
+
+        val author = memberService.getMemberInfo(post.authorId)
+
+        return PostDetailInfo.of(post, author, isBookmarked(requestMemberId, post))
+    }
+
+    private fun isBookmarked(
+        requestMemberId: Long?,
+        post: Post,
+    ): Boolean {
+        return requestMemberId?.let { bookmarkService.isBookmarked(it, post.id!!) } ?: false
     }
 }

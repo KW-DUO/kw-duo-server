@@ -2,10 +2,10 @@ package kwduo.member
 
 import kwduo.member.exception.MemberNotFoundException
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class MemberRepositoryImpl(
     private val memberJpaRepository: MemberJpaRepository,
     private val techStackJpaRepository: MemberTechStackJpaRepository,
@@ -13,11 +13,11 @@ class MemberRepositoryImpl(
     @Transactional
     override fun save(member: Member): Member {
         val memberEntity = MemberMapper.toMemberEntity(member)
-        val techStackEntities = MemberMapper.toMemberStackEntity(member)
-
         val savedMemberEntity = memberJpaRepository.save(memberEntity)
 
+        val techStackEntities = MemberMapper.toMemberStackEntity(member, savedMemberEntity.id!!)
         techStackJpaRepository.deleteByMemberId(memberEntity.id!!)
+
         val savedTechStackEntities = techStackJpaRepository.saveAll(techStackEntities)
 
         return MemberMapper.toDomain(savedMemberEntity, savedTechStackEntities)
@@ -39,6 +39,16 @@ class MemberRepositoryImpl(
         val memberEntity =
             memberJpaRepository.findByNickname(nickname)
                 ?: throw MemberNotFoundException()
+
+        val techStacks = techStackJpaRepository.findByMemberId(memberEntity.id!!)
+
+        return MemberMapper.toDomain(memberEntity, techStacks)
+    }
+
+    @Transactional(readOnly = true)
+    override fun findByOAuthId(oAuthId: String): Member? {
+        val memberEntity =
+            memberJpaRepository.findByOAuthId(oAuthId) ?: return null
 
         val techStacks = techStackJpaRepository.findByMemberId(memberEntity.id!!)
 

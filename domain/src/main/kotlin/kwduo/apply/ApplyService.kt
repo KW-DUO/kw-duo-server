@@ -1,5 +1,8 @@
 package kwduo.apply
 
+import org.springframework.stereotype.Service
+
+@Service
 class ApplyService(
     private val applyRepository: ApplyRepository,
 ) {
@@ -18,5 +21,9 @@ class ApplyService(
         postId: Long,
     ): Boolean {
         return applyRepository.existsByMemberAndPostId(memberId, postId)
+    }
+
+    fun getApplicants(postId: Long): List<Apply> {
+        return applyRepository.findByPostId(postId)
     }
 }

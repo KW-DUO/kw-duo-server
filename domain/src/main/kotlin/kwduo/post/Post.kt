@@ -1,5 +1,6 @@
 package kwduo.post
 
+import kwduo.member.Department
 import kwduo.member.Position
 import kwduo.member.TechStack
 import kwduo.member.exception.MemberNotAuthorizedException
@@ -10,15 +11,17 @@ abstract class Post(
     title: String,
     content: String,
     val authorId: Long,
-    val projectType: ProjectType,
-    val interestingField: List<Field>,
-    val wantedPosition: List<Position>,
+    var projectType: ProjectType,
+    var className: String?,
+    var department: Department?,
+    var interestingField: List<Field>,
+    var wantedPosition: List<Position>,
     var techStack: List<TechStack>,
     var isDeleted: Boolean = false,
     var isClosed: Boolean = false,
     val createdAt: LocalDateTime = LocalDateTime.now(),
 ) {
-    private var detail: PostDetail
+    protected var detail: PostDetail
 
     init {
         detail = PostDetail(title, content)
@@ -41,25 +44,6 @@ abstract class Post(
         return title
     }
 
-    fun updateDetail(
-        memberId: Long,
-        title: String,
-        content: String,
-    ): Boolean {
-        if (!isAuthor(memberId)) {
-            throw MemberNotAuthorizedException("작성자만 수정할 수 있습니다.")
-        }
-
-        val newDetail = PostDetail(title, content)
-
-        if (detail == newDetail) {
-            return false
-        }
-
-        detail = newDetail
-        return true
-    }
-
     fun close(memberId: Long) {
         if (!isAuthor(memberId)) {
             throw MemberNotAuthorizedException("작성자만 모집을 마감할 수 있습니다.")
@@ -78,7 +62,7 @@ abstract class Post(
         isClosed = false
     }
 
-    private fun isAuthor(memberId: Long) = memberId == authorId
+    protected fun isAuthor(memberId: Long) = memberId == authorId
 
     fun delete(memberId: Long) {
         if (!isAuthor(memberId)) {

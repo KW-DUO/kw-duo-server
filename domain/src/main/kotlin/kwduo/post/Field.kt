@@ -9,6 +9,6 @@ enum class Field(
     GAME("GAME"),
     GRAPHIC("GRAPHIC"),
     BLOCKCHAIN("BLOCKCHAIN"),
-    EMBEDDED("EMBEDDED"),
+    IOT("IOT"),
     ETC("ETC"),
 }

@@ -6,34 +6,33 @@ import java.time.LocalDateTime
 class Member(
     val id: Long? = null,
     val oAuthId: String,
-    var profileImgId: Long?,
     var nickname: String,
     var bio: String,
     val department: Department,
     var techStack: List<TechStack>,
     var position: Position,
-    private var emailInfo: KwEmailInfo,
+    val codingTestLanguage: String,
+//    private var emailInfo: KwEmailInfo,
     var githubUrl: String?,
     var baekjoonInfo: BaekJoonInfo?,
     val joinAt: LocalDateTime = LocalDateTime.now(),
 ) {
-    val email
-        get() = emailInfo.email
+    //    val email
+//        get() = emailInfo.email
     val techStackNames: List<String>
         get() = techStack.map { it.displayName }
 
-    val isEmailAuthenticated: Boolean
-        get() = emailInfo.isAuthenticated()
+//    val isEmailAuthenticated: Boolean
+//        get() = emailInfo.isAuthenticated()
 
     val baekjoonId
         get() = baekjoonInfo?.baekjoonId
 
-    fun authenticateEmail() {
-        emailInfo.authenticate()
-    }
+//    fun authenticateEmail() {
+//        emailInfo.authenticate()
+//    }
 
     fun updateInfo(request: MemberUpdateInfoRequest) {
-        this.profileImgId = request.profileImgId
         this.nickname = request.nickname
         this.bio = request.bio
         this.techStack = request.techStack.map { TechStack.of(it) }

@@ -1,5 +1,6 @@
 package kwduo.chatting.schema
 
+import kwduo.chatting.dto.ChatInfo
 import java.time.LocalDateTime
 
 data class ChatSchema(
@@ -7,4 +8,11 @@ data class ChatSchema(
     val message: String,
     val member: ChatMemberSchema,
     val createdAt: LocalDateTime,
-)
+) {
+    constructor(info: ChatInfo) : this(
+        id = info.id,
+        message = info.message,
+        member = ChatMemberSchema(info.member),
+        createdAt = info.createdAt,
+    )
+}

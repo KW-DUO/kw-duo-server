@@ -16,7 +16,7 @@ class MemberAuthorizeService(
         val isTokenExist = emailTokenService.findValidToken(member.id!!, token)
         check(isTokenExist) { "유효하지 않은 토큰입니다." }
 
-        member.authenticateEmail()
+//        member.authenticateEmail()
         memberRepository.save(member)
     }
 }

@@ -7,7 +7,18 @@ spring:
       - logging.yml
       - db.yml
       - jwt.yml
+  servlet:
+    multipart:
+      maxFileSize: 50MB
+      maxRequestSize: 50MB
 
 springdoc:
   swagger-ui:
     path: /api-docs
+
+server:
+  port: 8080
+  ssl:
+    key-store: classpath:keystore.p12
+    key-store-type: PKCS12
+    key-store-password: Untilpassword12

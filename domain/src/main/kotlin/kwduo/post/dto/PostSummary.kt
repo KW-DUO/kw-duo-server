@@ -12,7 +12,7 @@ data class PostSummary(
     val postType: String,
     val projectType: ProjectType,
     val title: String,
-    val department: Department,
+    val department: Department?,
     val className: String?,
     val wantedPosition: List<Position>,
     val wantedField: List<Field>,
@@ -24,6 +24,5 @@ data class PostSummary(
     data class Author(
         val id: Long,
         val nickname: String,
-        val profileImageUrl: String?,
     )
 }

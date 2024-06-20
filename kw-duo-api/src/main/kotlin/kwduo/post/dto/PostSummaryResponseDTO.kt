@@ -10,7 +10,7 @@ data class PostSummaryResponseDTO(
     val totalPage: Int,
 ) {
     constructor(result: Page<PostSummary>) : this(
-        posts = emptyList(),
+        posts = result.content.map { PostSummarySchema(it) },
         totalCount = result.totalCount,
         totalPage = result.totalPages,
         currentPage = result.currentPage,

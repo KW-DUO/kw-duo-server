@@ -1,7 +1,6 @@
 package kwduo.member.dto
 
 data class MemberUpdateInfoRequest(
-    val profileImgId: Long?,
     val nickname: String,
     val bio: String,
     val techStack: List<String>,

@@ -7,4 +7,6 @@ interface ApplyRepository {
         memberId: Long,
         postId: Long,
     ): Boolean
+
+    fun findByPostId(postId: Long): List<Apply>
 }

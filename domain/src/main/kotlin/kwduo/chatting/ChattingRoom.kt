@@ -15,13 +15,18 @@ class ChattingRoom(
         memberId: Long,
         now: LocalDateTime = LocalDateTime.now(),
     ) {
-        check(!isMember(memberId)) { "채팅방에 속한 멤버가 아닙니다." }
+        check(isMember(memberId)) { "채팅방에 속한 멤버가 아닙니다." }
 
         if (member1Id == memberId) {
             member1LastReadMessageTime = now
         } else {
             member2LastReadMessageTime = now
         }
+    }
+
+    fun getOtherParticipantId(id: Long): Long {
+        require(isMember(id)) { "채팅방에 속한 멤버가 아닙니다." }
+        return if (id == member1Id) member2Id else member1Id
     }
 
     companion object {

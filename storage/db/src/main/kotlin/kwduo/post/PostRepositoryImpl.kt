@@ -1,10 +1,10 @@
 package kwduo.post
 
 import org.springframework.data.repository.findByIdOrNull
-import org.springframework.stereotype.Repository
+import org.springframework.stereotype.Component
 import org.springframework.transaction.annotation.Transactional
 
-@Repository
+@Component
 class PostRepositoryImpl(
     private val postJpaRepository: PostJpaRepository,
     private val interestingFieldJpaRepository: PostInterestingFieldJpaRepository,
@@ -74,5 +74,31 @@ class PostRepositoryImpl(
         val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
 
         return PostMapper.toDomain(post, fields, techStack, wantedPositions)
+    }
+
+    @Transactional(readOnly = true)
+    override fun findFindTeamPostById(id: Long): FindTeamPost? {
+        val post =
+            postJpaRepository.findFindTeamPostByIdOrNull(id)
+                ?: return null
+
+        val fields = interestingFieldJpaRepository.findByPostId(id)
+        val techStack = techStackJpaRepository.findByPostId(id)
+        val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
+
+        return PostMapper.toFindTeamPostDomain(post, fields, techStack, wantedPositions)
+    }
+
+    @Transactional(readOnly = true)
+    override fun findFindTeammatePostById(id: Long): FindTeammatePost? {
+        val post =
+            postJpaRepository.findFindTeammatePostByIdOrNull(id)
+                ?: return null
+
+        val fields = interestingFieldJpaRepository.findByPostId(id)
+        val techStack = techStackJpaRepository.findByPostId(id)
+        val wantedPositions = wantedPositionJpaRepository.findByPostId(id)
+
+        return PostMapper.toFindTeammatePostDomain(post, fields, techStack, wantedPositions)
     }
 }

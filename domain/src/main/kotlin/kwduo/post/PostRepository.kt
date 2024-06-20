@@ -8,4 +8,8 @@ interface PostRepository {
     fun saveFindTeamPost(post: FindTeamPost): FindTeamPost
 
     fun findById(id: Long): Post?
+
+    fun findFindTeamPostById(id: Long): FindTeamPost?
+
+    fun findFindTeammatePostById(id: Long): FindTeammatePost?
 }

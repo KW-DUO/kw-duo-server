@@ -1,9 +1,7 @@
 package kwduo.post.schema
 
-import kwduo.member.Member
 import kwduo.member.schema.AuthorSchema
-import kwduo.post.FindTeammatePost
-import kwduo.post.Post
+import kwduo.post.dto.PostSummary
 import java.time.LocalDateTime
 
 data class PostSummarySchema(
@@ -11,8 +9,8 @@ data class PostSummarySchema(
     val postType: String,
     val projectType: String,
     val title: String,
-    val department: String,
-    val `class`: String?,
+    val department: String?,
+    val className: String?,
     val wantedPosition: List<String>,
     val wantedField: List<String>,
     val author: AuthorSchema,
@@ -20,33 +18,17 @@ data class PostSummarySchema(
     val techStack: List<String>,
     val createdAt: LocalDateTime,
 ) {
-    constructor(
-        post: Post,
-        author: Member,
-        className: String?,
-        department: String,
-        profileImgUrl: String?,
-        isBookmarked: Boolean,
-    ) : this(
-        id = post.id!!,
-        postType =
-            when (post) {
-                is FindTeammatePost -> "FIND_TEAMMATE"
-                else -> "FIND_TEAM"
-            },
+    constructor(post: PostSummary) : this(
+        id = post.id,
+        postType = post.postType,
         projectType = post.projectType.value,
         title = post.title,
-        department = department,
-        `class` = className,
-        wantedPosition = post.wantedPosition.map { it.displayName },
-        wantedField = post.interestingField.map { it.value },
-        author =
-            AuthorSchema(
-                id = author.id!!,
-                profileImgUrl = profileImgUrl,
-                nickname = author.nickname,
-            ),
-        bookmark = BookmarkSchema(isBookmarked),
+        department = post.department?.name,
+        className = post.className,
+        wantedPosition = post.wantedPosition.map { it.value },
+        wantedField = post.wantedField.map { it.value },
+        author = AuthorSchema(post.author.id, post.author.nickname),
+        bookmark = BookmarkSchema(post.isBookmarked),
         techStack = post.techStack.map { it.value },
         createdAt = post.createdAt,
     )

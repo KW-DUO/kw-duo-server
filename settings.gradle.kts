@@ -4,8 +4,10 @@ include(
     "kw-duo-api",
     "domain",
     "storage:db",
+    "storage:api",
     "support:logging",
     "support:jwt",
+    "support:util",
 )
 
 pluginManagement {

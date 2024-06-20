@@ -1,5 +1,6 @@
 package kwduo.post.dto
 
+import kwduo.member.Department
 import kwduo.member.Position
 import kwduo.member.TechStack
 import kwduo.post.Field
@@ -11,6 +12,8 @@ class FindTeamPostWriteRequest(
     val content: String,
     val authorId: Long,
     val projectType: String,
+    val className: String?,
+    val department: String?,
     val interestingField: List<String>,
     val wantedPosition: List<String>,
     val techStack: List<String>,
@@ -21,6 +24,8 @@ class FindTeamPostWriteRequest(
             content = content,
             authorId = authorId,
             projectType = ProjectType.of(projectType),
+            className = className,
+            department = department?.let { Department.valueOf(it) },
             interestingField = interestingField.map { Field.valueOf(it) },
             wantedPosition = wantedPosition.map { Position.of(it) },
             techStack = techStack.map { TechStack.of(it) },

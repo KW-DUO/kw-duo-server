@@ -2,7 +2,6 @@ package kwduo.member.dto
 
 import kwduo.member.BaekJoonInfo
 import kwduo.member.Department
-import kwduo.member.KwEmailInfo
 import kwduo.member.Member
 import kwduo.member.Position
 import kwduo.member.TechStack
@@ -13,6 +12,7 @@ data class MemberJoinRequest(
     val department: String,
     val techStack: List<String>,
     var position: String,
+    val codingTestLanguage: String,
     val email: String,
     var githubUrl: String?,
     var baekjoonId: String?,
@@ -26,13 +26,13 @@ data class MemberJoinRequest(
 
         return Member(
             oAuthId = oAuthId,
-            profileImgId = null,
             nickname = nickname,
             bio = "",
             department = Department.of(department),
             techStack = techStack.map { TechStack.of(it) },
             position = Position.of(position),
-            emailInfo = KwEmailInfo(email),
+            codingTestLanguage = codingTestLanguage,
+//            emailInfo = KwEmailInfo(email),
             githubUrl = githubUrl,
             baekjoonInfo = baekjoonInfo,
         )

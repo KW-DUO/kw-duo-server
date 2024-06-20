@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository
 interface PostTechStackJpaRepository : JpaRepository<PostTechStackEntity, Long> {
     @Query(
         """
-        SELECT pts.techStack
+        SELECT pts
         FROM PostTechStackEntity pts
         WHERE pts.postId = :postId
     """,

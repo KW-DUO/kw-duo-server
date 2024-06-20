@@ -6,6 +6,14 @@ class Page<T>(
     val totalPages: Int,
     val currentPage: Int,
 ) {
+    fun <R> map(transform: (T) -> R) =
+        Page(
+            content = content.map(transform),
+            totalCount = totalCount,
+            totalPages = totalPages,
+            currentPage = currentPage,
+        )
+
     companion object {
         fun <T> of(
             content: List<T>,
